@@ -1,0 +1,13 @@
+# Editores
+.idea/
+.vscode/
+*.iml
+
+# Backend (Java/Spring)
+target/
+*.jar
+
+# Frontend (Node/Web)
+node_modules/
+dist/
+.angular/

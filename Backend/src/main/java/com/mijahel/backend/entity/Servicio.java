@@ -33,7 +33,7 @@ public class Servicio {
     @Column(name = "fecha_programada")
     private LocalDateTime fechaProgramada;
 
-    @Column(name = "fecha_programada")
+    @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion = LocalDateTime.now();
 
     // getters y setters

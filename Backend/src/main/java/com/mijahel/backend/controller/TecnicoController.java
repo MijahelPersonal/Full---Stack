@@ -42,4 +42,18 @@ public class TecnicoController {
 
         return tecnicoRepository.save(tecnico);
     }
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public Tecnico actualizar(@PathVariable UUID id, @RequestParam String especialidad) {
+        Tecnico tecnico = tecnicoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Técnico no encontrado"));
+        tecnico.setEspecialidad(especialidad);
+        return tecnicoRepository.save(tecnico);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public void eliminar(@PathVariable UUID id) {
+        tecnicoRepository.deleteById(id);
+    }
 }

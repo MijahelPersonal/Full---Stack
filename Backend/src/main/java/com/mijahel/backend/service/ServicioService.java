@@ -1,6 +1,7 @@
 package com.mijahel.backend.service;
 
 import com.mijahel.backend.entity.*;
+import com.mijahel.backend.repository.ClienteRepository;
 import com.mijahel.backend.repository.HistorialServicioRepository;
 import com.mijahel.backend.repository.ServicioRepository;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,20 @@ public class ServicioService {
 
     private final ServicioRepository servicioRepository;
     private final HistorialServicioRepository historialRepository;
+    private final ClienteRepository clienteRepository;
 
     public ServicioService(ServicioRepository servicioRepository,
-                           HistorialServicioRepository historialRepository) {
+                           HistorialServicioRepository historialRepository,
+                           ClienteRepository clienteRepository) {
         this.servicioRepository = servicioRepository;
         this.historialRepository = historialRepository;
+        this.clienteRepository = clienteRepository;
     }
 
     public Servicio crear(Servicio servicio) {
+        Cliente cliente = clienteRepository.findById(servicio.getCliente().getId())
+                        .orElseThrow(() -> new RuntimeException("cliente no encontrado"));
+        servicio.setCliente(cliente);
         servicio.setEstado(EstadoServicio.PENDIENTE);
         return servicioRepository.save(servicio);
     }

@@ -3,6 +3,7 @@ package com.mijahel.backend.exception;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,6 +24,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> manejarNoEncontrado(RuntimeException ex) {
         return construirRespuesta(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+    @ExceptionHandler(JpaSystemException.class)
+    public ResponseEntity<Map<String, Object>> manejarErrorJpa(JpaSystemException ex) {
+        return construirRespuesta(HttpStatus.BAD_REQUEST, "Error de datos: " + ex.getMostSpecificCause().getMessage());
     }
 
     @ExceptionHandler(IllegalStateException.class)

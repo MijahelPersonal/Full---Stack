@@ -1,0 +1,40 @@
+<div class="page">
+  <h1>Materiales</h1>
+
+  @if (error()) { <p class="error-msg">{{ error() }}</p> }
+
+  <form (ngSubmit)="guardar()" class="form-inline">
+    <input [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required />
+    <input [(ngModel)]="categoria" name="categoria" placeholder="Categoría" />
+    <input [(ngModel)]="unidadMedida" name="unidadMedida" placeholder="Unidad" />
+    <input [(ngModel)]="stockActual" name="stockActual" type="number" placeholder="Stock actual" />
+    <input [(ngModel)]="stockMinimo" name="stockMinimo" type="number" placeholder="Stock mínimo" />
+    <button type="submit">{{ editandoId ? 'Guardar cambios' : 'Agregar material' }}</button>
+    @if (editandoId) {
+      <button type="button" class="btn-secondary" (click)="cancelar()">Cancelar</button>
+    }
+  </form>
+
+  @if (cargando()) { <p>Cargando...</p> }
+
+  <table>
+    <thead>
+      <tr><th>Nombre</th><th>Categoría</th><th>Unidad</th><th>Stock actual</th><th>Stock mínimo</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      @for (m of materiales(); track m.id) {
+        <tr [class.alerta]="m.stockActual <= m.stockMinimo">
+          <td>{{ m.nombre }}</td>
+          <td>{{ m.categoria }}</td>
+          <td>{{ m.unidadMedida }}</td>
+          <td>{{ m.stockActual }}</td>
+          <td>{{ m.stockMinimo }}</td>
+          <td>
+            <button class="btn-small" (click)="editar(m)">Editar</button>
+            <button class="btn-small btn-danger" (click)="eliminar(m.id)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

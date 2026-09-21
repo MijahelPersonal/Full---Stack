@@ -1,0 +1,65 @@
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6fb;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1f3a6e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  flex-shrink: 0;
+
+  .brand {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    flex: 1;
+
+    a {
+      color: #c7d3ec;
+      text-decoration: none;
+      padding: 0.7rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+
+      &:hover { background: rgba(255,255,255,0.08); color: white; }
+      &.active { background: #2f6fed; color: white; font-weight: bold; }
+    }
+  }
+
+  .rol-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #8fa3d1;
+    padding: 0 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .logout-btn {
+    padding: 0.6rem;
+    background: #e8543f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-x: auto;
+}

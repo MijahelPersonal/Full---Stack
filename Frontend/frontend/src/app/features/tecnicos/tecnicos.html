@@ -1,0 +1,47 @@
+<div class="page">
+  <h1>Técnicos</h1>
+
+  @if (error()) { <p class="error-msg">{{ error() }}</p> }
+
+  <form (ngSubmit)="guardar()" class="form-inline">
+    @if (!editandoId) {
+      <select [(ngModel)]="usuarioSeleccionado" name="usuario" required>
+        <option value="" disabled selected>Selecciona un usuario técnico</option>
+        @for (u of usuariosDisponibles(); track u.id) {
+          <option [value]="u.id">{{ u.nombre }} ({{ u.email }})</option>
+        }
+      </select>
+    }
+    <input [(ngModel)]="especialidad" name="especialidad" placeholder="Especialidad" required />
+    <button type="submit">{{ editandoId ? 'Guardar cambios' : 'Convertir en técnico' }}</button>
+    @if (editandoId) {
+      <button type="button" class="btn-secondary" (click)="cancelar()">Cancelar</button>
+    }
+  </form>
+
+  @if (cargando()) { <p>Cargando...</p> }
+
+  @if (!cargando() && usuariosDisponibles().length === 0 && !editandoId) {
+    <p class="info-msg">No hay usuarios con rol TECNICO disponibles. Regístralos desde /registro.</p>
+  }
+
+  <table>
+    <thead>
+      <tr><th>Nombre</th><th>Email</th><th>Especialidad</th><th>Disponibilidad</th><th>Acciones</th></tr>
+    </thead>
+    <tbody>
+      @for (t of tecnicos(); track t.id) {
+        <tr>
+          <td>{{ t.usuario.nombre }}</td>
+          <td>{{ t.usuario.email }}</td>
+          <td>{{ t.especialidad }}</td>
+          <td>{{ t.estadoDisponibilidad }}</td>
+          <td>
+            <button class="btn-small" (click)="editar(t)">Editar</button>
+            <button class="btn-small btn-danger" (click)="eliminar(t.id)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

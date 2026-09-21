@@ -1,0 +1,197 @@
+:root {
+  --bg: #10161A;
+  --surface: #171F24;
+  --surface-hover: #1E2830;
+  --border: #263139;
+  --text: #E8EDEF;
+  --text-muted: #8494A0;
+  --accent: #F2A93C;
+  --accent-soft: rgba(242, 169, 60, 0.14);
+  --live: #3ED9C0;
+  --live-soft: rgba(62, 217, 192, 0.14);
+  --danger: #E8604C;
+  --danger-soft: rgba(232, 96, 76, 0.14);
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* la app no hace scroll de página, solo los paneles internos */
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+/* ---------- Estructura de página estándar (usada por todos los módulos) ---------- */
+.page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+
+  input, select {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 130px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: border-color 0.15s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+  }
+
+  button { flex-shrink: 0; }
+}
+
+.btn {
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.88rem;
+  font-family: inherit;
+  transition: transform 0.1s ease, filter 0.15s ease;
+
+  &:active { transform: scale(0.97); }
+  &:hover { filter: brightness(1.1); }
+}
+
+.btn-primary { background: var(--accent); color: #1a1206; }
+.btn-secondary { background: var(--border); color: var(--text); }
+.btn-danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); }
+.btn-small { padding: 0.35rem 0.75rem; font-size: 0.78rem; margin-right: 0.4rem; }
+
+/* ---------- Panel scrolleable de datos (esto reemplaza el scroll de toda la página) ---------- */
+.panel {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+  }
+
+  th {
+    text-align: left;
+    padding: 0.85rem 1rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+
+  td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  tbody tr {
+    transition: background 0.12s ease;
+    &:hover { background: var(--surface-hover); }
+    &:last-child td { border-bottom: none; }
+  }
+}
+
+/* ---------- Badges de estado ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+}
+
+.badge-pendiente, .badge-baja { background: var(--border); color: var(--text-muted); }
+.badge-asignado, .badge-media { background: var(--accent-soft); color: var(--accent); }
+.badge-en_ruta { background: var(--live-soft); color: var(--live); }
+.badge-en_servicio, .badge-alta { background: var(--danger-soft); color: var(--danger); }
+.badge-finalizado { background: rgba(62, 217, 192, 0.14); color: var(--live); }
+
+.error-msg {
+  background: var(--danger-soft);
+  color: var(--danger);
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.info-msg { color: var(--text-muted); font-style: italic; font-size: 0.88rem; }
+
+/* Transición suave al cambiar de ruta */
+.content > * {
+  animation: fadeIn 0.18s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

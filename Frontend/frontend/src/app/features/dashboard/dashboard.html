@@ -1,0 +1,46 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Panel de operaciones</h1>
+  </div>
+
+  @if (error()) { <p class="error-msg">{{ error() }}</p> }
+
+  <div class="panel dash-panel">
+    @if (cargando()) {
+      <p class="info-msg" style="padding:1.5rem;">Cargando métricas...</p>
+    }
+
+    @if (resumen(); as data) {
+      <div class="cards-grid">
+        <div class="stat-card">
+          <span class="stat-label">Pendientes</span>
+          <span class="stat-value">{{ data.pendientes }}</span>
+        </div>
+        <div class="stat-card accent-live">
+          <span class="stat-label">En ruta</span>
+          <span class="stat-value">{{ data.enRuta }}</span>
+        </div>
+        <div class="stat-card accent-amber">
+          <span class="stat-label">En servicio</span>
+          <span class="stat-value">{{ data.enServicio }}</span>
+        </div>
+        <div class="stat-card accent-live">
+          <span class="stat-label">Finalizados</span>
+          <span class="stat-value">{{ data.finalizados }}</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Total servicios</span>
+          <span class="stat-value">{{ data.totalServicios }}</span>
+        </div>
+        <div class="stat-card accent-live">
+          <span class="stat-label">Técnicos activos</span>
+          <span class="stat-value">{{ data.tecnicosActivos }}</span>
+        </div>
+        <div class="stat-card accent-danger">
+          <span class="stat-label">Stock bajo</span>
+          <span class="stat-value">{{ data.materialesStockBajo }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

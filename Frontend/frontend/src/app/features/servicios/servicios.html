@@ -1,0 +1,76 @@
+<div class="page">
+  <h1>Servicios</h1>
+
+  @if (error()) {
+    <p class="error-msg">{{ error() }}</p>
+  }
+
+  <form (ngSubmit)="crear()" class="form-inline">
+    <select [(ngModel)]="clienteId" name="cliente" required>
+      <option value="" disabled selected>Selecciona un cliente</option>
+      @for (c of clientes(); track c.id) {
+        <option [value]="c.id">{{ c.nombre }}</option>
+      }
+    </select>
+    <select [(ngModel)]="tipo" name="tipo">
+      <option value="INSTALACION">Instalación</option>
+      <option value="MANTENIMIENTO">Mantenimiento</option>
+      <option value="REPARACION">Reparación</option>
+    </select>
+    <select [(ngModel)]="prioridad" name="prioridad">
+      <option value="BAJA">Baja</option>
+      <option value="MEDIA">Media</option>
+      <option value="ALTA">Alta</option>
+    </select>
+    <input [(ngModel)]="descripcion" name="descripcion" placeholder="Descripción" required />
+    <button type="submit">Crear servicio</button>
+  </form>
+
+  @if (cargando()) {
+    <p>Cargando...</p>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Tipo</th>
+        <th>Prioridad</th>
+        <th>Estado</th>
+        <th>Técnico</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (s of servicios(); track s.id) {
+        <tr>
+          <td>{{ s.cliente.nombre }}</td>
+          <td>{{ s.tipo }}</td>
+          <td>{{ s.prioridad }}</td>
+          <td>{{ s.estado }}</td>
+          <td>
+            @if (s.tecnico) {
+              {{ s.tecnico.usuario.nombre }}
+            } @else {
+              <select #tecnicoSelect (change)="asignarTecnico(s.id, tecnicoSelect.value)">
+                <option value="" selected disabled>Asignar técnico</option>
+                @for (t of tecnicos(); track t.id) {
+                  <option [value]="t.id">{{ t.usuario.nombre }}</option>
+                }
+              </select>
+            }
+          </td>
+          <td>
+            @if (estadosSiguientes[s.estado]) {
+              <button (click)="avanzarEstado(s)">
+                Avanzar a {{ estadosSiguientes[s.estado] }}
+              </button>
+            } @else {
+              <span>Finalizado</span>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

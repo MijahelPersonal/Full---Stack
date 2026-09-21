@@ -22,7 +22,7 @@ public class MaterialController {
         return materialRepository.findAll();
     }
     @PostMapping
-    @PreAuthorize("hasRole('administrador')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public Material crear(@RequestBody Material material){
         return materialRepository.save(material);
     }

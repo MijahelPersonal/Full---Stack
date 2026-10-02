@@ -1,14 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { RuntimeConfigService } from './runtime-config.service';
 import { AuthResponse, LoginRequest, RegisterRequest, Rol } from '../models/usuario.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private readonly apiUrl = `${environment.apiUrl}/auth`;
+  private readonly apiUrl = `${inject(RuntimeConfigService).apiUrl}/auth`;
   private readonly tokenKey = 'token';
   private readonly rolKey = 'rol';
   private readonly emailKey = 'email';

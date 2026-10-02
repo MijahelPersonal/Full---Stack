@@ -1,0 +1,12 @@
+appId: com.mijahel.gestion
+productName: Gestion
+directories:
+  output: release
+files:
+  - electron/main.cjs
+  - electron/preload.cjs
+  - electron/protocol.cjs
+  - dist/desktop/browser/**/*
+  - package.json
+win:
+  target: nsis

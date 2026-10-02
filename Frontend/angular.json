@@ -53,6 +53,15 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "desktop": {
+              "outputPath": "dist/desktop",
+              "fileReplacements": [
+                {
+                  "with": "src/environments/environment.desktop.ts",
+                  "replace": "src/environments/environment.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -65,6 +74,9 @@
             },
             "development": {
               "buildTarget": "frontend:build:development"
+            },
+            "desktop-development": {
+              "buildTarget": "frontend:build:development,desktop"
             }
           },
           "defaultConfiguration": "development"

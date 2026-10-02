@@ -1,0 +1,85 @@
+.auth-screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  background-image: radial-gradient(circle at 20% 20%, rgba(62,217,192,0.06), transparent 40%),
+                     radial-gradient(circle at 80% 80%, rgba(242,169,60,0.06), transparent 40%);
+}
+
+.auth-card {
+  width: 340px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 2.2rem 2rem;
+  animation: riseIn 0.25s ease;
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+
+  .brand-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 8px var(--live);
+  }
+}
+
+h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 1.4rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+input {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.65rem 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 1.1rem;
+  font-family: inherit;
+  font-size: 0.92rem;
+  transition: border-color 0.15s ease;
+
+  &:focus { outline: none; border-color: var(--accent); }
+}
+
+.btn-full { width: 100%; margin-top: 0.3rem; }
+
+.auth-footer {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 1.2rem 0 0;
+
+  a { color: var(--accent); text-decoration: none; font-weight: 600; }
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

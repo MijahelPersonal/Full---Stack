@@ -1,0 +1,36 @@
+<div class="page">
+  <div class="page-header"><h1>Clientes</h1></div>
+
+  @if (error()) { <p class="error-msg">{{ error() }}</p> }
+
+  <div class="toolbar">
+    <input [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required />
+    <input [(ngModel)]="direccion" name="direccion" placeholder="Dirección" />
+    <input [(ngModel)]="telefono" name="telefono" placeholder="Teléfono" />
+    <button class="btn btn-primary" (click)="guardar()">{{ editandoId ? 'Guardar cambios' : 'Agregar cliente' }}</button>
+    @if (editandoId) {
+      <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    }
+  </div>
+
+  <div class="panel">
+    <table>
+      <thead>
+        <tr><th>Nombre</th><th>Dirección</th><th>Teléfono</th><th>Acciones</th></tr>
+      </thead>
+      <tbody>
+        @for (c of clientes(); track c.id) {
+          <tr>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.direccion }}</td>
+            <td>{{ c.telefono }}</td>
+            <td>
+              <button class="btn btn-small btn-secondary" (click)="editar(c)">Editar</button>
+              <button class="btn btn-small btn-danger" (click)="eliminar(c.id)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

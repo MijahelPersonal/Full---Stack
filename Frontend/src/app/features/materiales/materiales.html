@@ -1,0 +1,46 @@
+<div class="page">
+  <div class="page-header"><h1>Materiales</h1></div>
+
+  @if (error()) { <p class="error-msg">{{ error() }}</p> }
+
+  <div class="toolbar">
+    <input [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required />
+    <input [(ngModel)]="categoria" name="categoria" placeholder="Categoría" />
+    <input [(ngModel)]="unidadMedida" name="unidadMedida" placeholder="Unidad" />
+    <input [(ngModel)]="stockActual" name="stockActual" type="number" placeholder="Stock actual" />
+    <input [(ngModel)]="stockMinimo" name="stockMinimo" type="number" placeholder="Stock mínimo" />
+    <button class="btn btn-primary" (click)="guardar()">{{ editandoId ? 'Guardar cambios' : 'Agregar material' }}</button>
+    @if (editandoId) {
+      <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    }
+  </div>
+
+  <div class="panel">
+    <table>
+      <thead>
+        <tr><th>Nombre</th><th>Categoría</th><th>Unidad</th><th>Stock actual</th><th>Stock mínimo</th><th>Acciones</th></tr>
+      </thead>
+      <tbody>
+        @for (m of materiales(); track m.id) {
+          <tr>
+            <td>{{ m.nombre }}</td>
+            <td>{{ m.categoria }}</td>
+            <td>{{ m.unidadMedida }}</td>
+            <td>{{ m.stockActual }}</td>
+            <td>
+              @if (m.stockActual <= m.stockMinimo) {
+                <span class="badge badge-en_servicio">{{ m.stockMinimo }}</span>
+              } @else {
+                {{ m.stockMinimo }}
+              }
+            </td>
+            <td>
+              <button class="btn btn-small btn-secondary" (click)="editar(m)">Editar</button>
+              <button class="btn btn-small btn-danger" (click)="eliminar(m.id)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

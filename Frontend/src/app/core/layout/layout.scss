@@ -1,0 +1,107 @@
+.app-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 232px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem 1rem;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0 0.5rem;
+  margin-bottom: 2rem;
+
+  .brand-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--live);
+    box-shadow: 0 0 8px var(--live);
+    flex-shrink: 0;
+  }
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.6rem 0.7rem;
+    border-radius: 8px;
+    font-size: 0.87rem;
+    font-weight: 500;
+    border-left: 2px solid transparent;
+    transition: background 0.12s ease, color 0.12s ease;
+
+    svg { flex-shrink: 0; opacity: 0.85; }
+
+    &:hover { background: var(--surface-hover); color: var(--text); }
+
+    &.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+  }
+}
+
+.sidebar-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.rol-badge {
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  padding: 0 0.3rem;
+  margin-bottom: 0.7rem;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 0.6rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--danger);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.12s ease;
+
+  &:hover { background: var(--danger-soft); }
+}
+
+.content {
+  flex: 1;
+  padding: 1.75rem 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}

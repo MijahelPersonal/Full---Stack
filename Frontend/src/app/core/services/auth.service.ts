@@ -11,11 +11,17 @@ export class AuthService {
   private readonly apiUrl = `${inject(RuntimeConfigService).apiUrl}/auth`;
   private readonly tokenKey = 'token';
   private readonly rolKey = 'rol';
-  private readonly emailKey = 'email';
+  private readonly usernameKey = 'username';
 
   rolActual = signal<Rol | null>(this.obtenerRol());
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    // Las sesiones anteriores usaban email como subject del JWT.
+    if (this.obtenerToken() && !this.obtenerUsername()) {
+      [this.tokenKey, this.rolKey, 'email'].forEach(key => localStorage.removeItem(key));
+      this.rolActual.set(null);
+    }
+  }
 
   login(credenciales: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credenciales).pipe(
@@ -32,7 +38,8 @@ export class AuthService {
   private guardarSesion(res: AuthResponse) {
     localStorage.setItem(this.tokenKey, res.token);
     localStorage.setItem(this.rolKey, res.rol);
-    localStorage.setItem(this.emailKey, res.email);
+    localStorage.removeItem('email');
+    localStorage.setItem(this.usernameKey, res.username);
     this.rolActual.set(res.rol);
   }
 
@@ -45,6 +52,7 @@ export class AuthService {
   obtenerToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
+  obtenerUsername():string|null {return localStorage.getItem(this.usernameKey);}
 
   obtenerRol(): Rol | null {
     return localStorage.getItem(this.rolKey) as Rol | null;

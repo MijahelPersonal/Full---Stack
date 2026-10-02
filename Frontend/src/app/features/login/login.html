@@ -1,27 +1,22 @@
-<div class="auth-screen">
-  <div class="auth-card">
-    <div class="auth-brand">
-      <span class="brand-dot"></span>
-      <span>Consola de Operaciones</span>
-    </div>
-    <h1>Iniciar sesión</h1>
-
-    @if (error()) {
-      <p class="error-msg">{{ error() }}</p>
-    }
-
-    <form (ngSubmit)="onSubmit()">
-      <label for="email">Correo</label>
-      <input id="email" type="email" [(ngModel)]="email" name="email" required />
-
-      <label for="password">Contraseña</label>
-      <input id="password" type="password" [(ngModel)]="password" name="password" required />
-
-      <button type="submit" class="btn btn-primary btn-full" [disabled]="cargando()">
-        {{ cargando() ? 'Ingresando...' : 'Ingresar' }}
-      </button>
-    </form>
-
-    <p class="auth-footer">¿No tienes cuenta? <a routerLink="/registro">Regístrate</a></p>
-  </div>
+<div class="login-screen">
+  <main class="login-panel" aria-labelledby="login-title">
+    <section class="identity-panel" aria-label="Sistema de Gestión, Inventario y Ventas">
+      <div class="identity-brand"><span class="brand-mark">G</span><span>Sistema de Gestión<small>OPERACIONES INTERNAS</small></span></div>
+      <div class="identity-copy"><span class="identity-label">TU OPERACIÓN, CONECTADA</span><h2>Inventario<br/>y Ventas<span>.</span></h2><p>Controla productos, stock y ventas desde un solo lugar.</p></div>
+      <div class="inventory-art" aria-hidden="true"><div class="art-orbit"></div><svg viewBox="0 0 300 170" fill="none"><path d="M50 130 150 165 250 130 150 95Z" fill="#283753"/><path d="m88 58 62-29 62 29-62 30Z" fill="#597fee"/><path d="M88 58v65l62 30V88Z" fill="#3455a1"/><path d="M150 88v65l62-30V58Z" fill="#253e77"/><path d="m119 43 62 29v24" stroke="#b1c4ff" stroke-width="5"/><path d="m102 112 20 9" stroke="#a0b7f6" stroke-width="4" stroke-linecap="round"/><rect x="218" y="20" width="46" height="46" rx="12" fill="#243753" stroke="#4d648a"/><path d="m231 43 8 8 13-16" stroke="#9bb8ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="54" r="5" fill="#788fde"/><circle cx="250" cy="102" r="3" fill="#587bbe"/></svg></div>
+      <div class="identity-footer"><span class="secure-dot"></span>Un espacio para tu equipo</div>
+    </section>
+    <section class="form-panel">
+      <div class="form-intro"><span class="form-label">ACCESO AL SISTEMA</span><h1 id="login-title">Bienvenido</h1><p>Inicia sesión para continuar</p></div>
+      <form (ngSubmit)="onSubmit()" #f="ngForm" [attr.aria-busy]="cargando()">
+        <label for="username">Usuario</label>
+        <div class="input-wrap"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg><input id="username" name="username" type="text" [(ngModel)]="username" placeholder="Nombre de usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required maxlength="80" [disabled]="cargando()"/></div>
+        <label for="password">Contraseña</label>
+        <div class="input-wrap password-wrap"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><input id="password" name="password" [type]="mostrarPassword()?'text':'password'" [(ngModel)]="password" placeholder="Tu contraseña" autocomplete="current-password" required [disabled]="cargando()"/><button class="password-toggle" type="button" (click)="mostrarPassword.set(!mostrarPassword())" [attr.aria-label]="mostrarPassword()?'Ocultar contraseña':'Mostrar contraseña'" [attr.aria-pressed]="mostrarPassword()" [disabled]="cargando()"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>@if(mostrarPassword()){<path d="m3 3 18 18"/>}</svg></button></div>
+        @if(error()){<p class="login-error" role="alert">{{error()}}</p>}
+        <button class="login-submit" type="submit" [disabled]="f.invalid||!username.trim()||cargando()">@if(cargando()){<span class="login-spinner" aria-hidden="true"></span>}{{cargando()?'Iniciando sesión…':'Iniciar sesión'}}<span aria-hidden="true">→</span></button>
+      </form>
+      <p class="access-note"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6Z"/><path d="m8 12 3 3 5-6"/></svg>Acceso exclusivo para personal autorizado.</p>
+    </section>
+  </main>
 </div>

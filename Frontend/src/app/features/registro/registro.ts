@@ -14,6 +14,7 @@ import { Rol } from '../../core/models/usuario.model';
 export class Registro {
 
   nombre = '';
+  username = '';
   email = '';
   password = '';
   rol: Rol = 'ADMINISTRADOR';
@@ -29,6 +30,7 @@ export class Registro {
 
     this.authService.register({
       nombre: this.nombre,
+      username: this.username,
       email: this.email,
       password: this.password,
       rol: this.rol

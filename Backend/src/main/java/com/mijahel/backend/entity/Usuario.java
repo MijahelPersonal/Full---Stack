@@ -14,7 +14,10 @@ public class Usuario {
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 80)
+    private String username;
+
+    @Column(unique = true)
     private String email;
 
     @Column(name = "password_hash", nullable = false)
@@ -40,6 +43,8 @@ public class Usuario {
     public String getEmail() {
         return email;
     }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
     public void setEmail(String email) {
         this.email = email;

@@ -1,29 +1,19 @@
 import { Routes } from '@angular/router';
 import { Login } from './features/login/login';
-import { Registro } from './features/registro/registro';
-import { Dashboard } from './features/dashboard/dashboard';
-import { Clientes } from './features/clientes/clientes';
-import { Tecnicos } from './features/tecnicos/tecnicos';
-import { Servicios } from './features/servicios/servicios';
-import { Materiales } from './features/materiales/materiales';
 import { Layout } from './core/layout/layout';
 import { authGuard } from './core/guards/auth.guard';
-
 export const routes: Routes = [
-  { path: 'login', component: Login },
-  { path: 'registro', component: Registro },
-  {
-    path: '',
-    component: Layout,
-    canActivate: [authGuard],
-    children: [
-      { path: 'dashboard', component: Dashboard },
-      { path: 'clientes', component: Clientes },
-      { path: 'tecnicos', component: Tecnicos },
-      { path: 'servicios', component: Servicios },
-      { path: 'materiales', component: Materiales },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    ]
-  },
-  { path: '**', redirectTo: '/login' },
+ {path:'login',component:Login},
+ {path:'',component:Layout,canActivate:[authGuard],children:[
+  {path:'inicio',loadComponent:()=>import('./features/inicio/inicio').then(m=>m.Inicio)},
+  {path:'nueva-venta',loadComponent:()=>import('./features/nueva-venta/nueva-venta').then(m=>m.NuevaVenta)},
+  {path:'productos',loadComponent:()=>import('./features/productos/productos').then(m=>m.Productos)},
+  {path:'inventario',loadComponent:()=>import('./features/inventario/inventario').then(m=>m.Inventario)},
+  {path:'clientes',loadComponent:()=>import('./features/clientes-comerciales/clientes-comerciales').then(m=>m.ClientesComerciales)},
+  {path:'ventas',loadComponent:()=>import('./features/ventas/ventas').then(m=>m.Ventas)},
+  {path:'reportes',loadComponent:()=>import('./features/reportes/reportes').then(m=>m.Reportes)},
+  {path:'dashboard',redirectTo:'inicio',pathMatch:'full'},
+  {path:'',redirectTo:'inicio',pathMatch:'full'}
+ ]},
+ {path:'**',redirectTo:'inicio'}
 ];

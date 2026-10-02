@@ -18,7 +18,7 @@ function serveAngular(root) {
     catch { if (path.extname(url.pathname)) return new Response('Not found', { status: 404 }); file = path.join(root, 'index.html'); }
     const response = await net.fetch(pathToFileURL(file).toString());
     const headers = new Headers(response.headers);
-    headers.set('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src http://localhost:8080 " + (process.env.GESTION_API_URL ? new URL(process.env.GESTION_API_URL).origin : '') + "; object-src 'none'; base-uri 'self'; frame-src 'none'");
+    headers.set('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: http://localhost:8080 " + (process.env.GESTION_API_URL ? new URL(process.env.GESTION_API_URL).origin : '') + "; connect-src http://localhost:8080 " + (process.env.GESTION_API_URL ? new URL(process.env.GESTION_API_URL).origin : '') + "; object-src 'none'; base-uri 'self'; frame-src 'none'");
     return new Response(response.body, { status: response.status, headers });
   });
 }

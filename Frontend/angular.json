@@ -61,7 +61,22 @@
                   "with": "src/environments/environment.desktop.ts",
                   "replace": "src/environments/environment.ts"
                 }
-              ]
+              ],
+              "optimization": {
+                "styles": {
+                  "inlineCritical": false
+                }
+              }
+            },
+            "desktop-development": {
+              "optimization": false,
+              "fileReplacements": [
+                {
+                  "with": "src/environments/environment.desktop.ts",
+                  "replace": "src/environments/environment.ts"
+                }
+              ],
+              "outputPath": "dist/desktop"
             }
           },
           "defaultConfiguration": "production"
@@ -76,7 +91,7 @@
               "buildTarget": "frontend:build:development"
             },
             "desktop-development": {
-              "buildTarget": "frontend:build:development,desktop"
+              "buildTarget": "frontend:build:development,desktop-development"
             }
           },
           "defaultConfiguration": "development"

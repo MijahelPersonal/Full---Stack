@@ -1,0 +1,107 @@
+---
+import Icono from "./Icono.astro";
+interface Props {
+  checkout?: boolean;
+}
+const { checkout = false } = Astro.props;
+---
+
+<div class="cart-layout" data-cart-page>
+  <section class="cart-items">
+    <div class="cart-table-heading">
+      <span>Producto</span>
+      <span>Precio</span>
+      <span>Cantidad</span>
+      <span>Subtotal</span>
+    </div>
+    <div data-cart-lines></div>
+    <div class="empty-state" data-cart-empty>
+      <Icono nombre="carrito" />
+      <h2>Tu carrito está esperando.</h2>
+      <p>Encuentra el hardware para tu siguiente proyecto.</p>
+      <a href="/productos" class="button">
+        Explorar productos
+        <Icono nombre="flecha" />
+      </a>
+    </div>
+    <p class="cart-refresh-note" data-cart-refresh role="status"></p>
+    <a class="continue-shopping" href="/productos">
+      <Icono nombre="flecha" clase="rotate" />
+      Seguir comprando
+    </a>
+  </section>
+  <aside class="cart-summary">
+    <h2>Resumen de compra</h2>
+    <dl>
+      <div>
+        <dt>Subtotal</dt>
+        <dd data-cart-subtotal>S/ 0.00</dd>
+      </div>
+      <div>
+        <dt>Modalidad</dt>
+        <dd>Recojo en tienda</dd>
+      </div>
+      <div class="summary-total">
+        <dt>Total de productos</dt>
+        <dd data-cart-total>S/ 0.00</dd>
+      </div>
+    </dl>
+    {checkout ? (
+      <>
+        <button class="button" data-confirm-order disabled>
+          Confirmar pedido
+          <Icono nombre="flecha" />
+        </button>
+        <p data-order-error role="alert"></p><p class="checkout-notice">
+          Tu pedido se reservará cuando la tienda lo confirme. No se realiza ningún pago online.
+        </p>
+        <a class="button button-outline" href="/contacto">
+          Consultar con Struch
+        </a>
+      </>
+    ) : (
+      <a class="button" href="/finalizar-compra" data-checkout-link>
+        Finalizar pedido
+        <Icono nombre="flecha" />
+      </a>
+    )}
+    <p class="cart-security">
+      <Icono nombre="escudo" />
+      Tu selección se guarda en este dispositivo.
+    </p>
+  </aside>
+</div>
+<template id="cart-line-template">
+  <article class="cart-line">
+    <a class="cart-product">
+      <div class="cart-product-image">
+        <img width="100" height="100" loading="lazy" decoding="async" hidden />
+        <span class="cart-image-placeholder">◇</span>
+      </div>
+      <div>
+        <p class="cart-line-brand"></p>
+        <h2 class="cart-line-name"></h2>
+        <small class="cart-line-stock"></small>
+      </div>
+    </a>
+    <strong class="cart-line-price"></strong>
+    <div class="quantity-control">
+      <button type="button" data-quantity-minus aria-label="Reducir cantidad">
+        −
+      </button>
+      <input type="number" min="1" step="1" aria-label="Cantidad de producto" />
+      <button type="button" data-quantity-plus aria-label="Aumentar cantidad">
+        +
+      </button>
+    </div>
+    <strong class="cart-line-subtotal"></strong>
+    <button
+      type="button"
+      class="remove-line icon-button"
+      data-remove-cart
+      aria-label="Eliminar producto"
+    >
+      <Icono nombre="papelera" />
+    </button>
+  </article>
+</template>

@@ -1,0 +1,8 @@
+---
+import Catalogo from "../components/Catalogo.astro";
+import { prepararCatalogo } from "../lib/tienda";
+const resultado = await prepararCatalogo(Astro.url.searchParams);
+Astro.response.status = resultado.status;
+---
+
+<Catalogo resultado={resultado} />

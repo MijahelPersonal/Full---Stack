@@ -1,0 +1,95 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Icono from "../components/Icono.astro";
+import { contacto } from "../lib/shared";
+---
+
+<Layout title="Contacto">
+  <div class="container page-shell">
+    <Breadcrumb titulo="Contacto" />
+    <div class="page-title">
+      <p class="eyebrow">ESTAMOS PARA AYUDARTE</p>
+      <h1>Hablemos de tu próximo equipo.</h1>
+      <p>Consulta sobre productos, disponibilidad y condiciones de compra.</p>
+    </div>
+    <div class="contact-grid">
+      <a
+        href={contacto.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="contact-card"
+      >
+        <Icono nombre="telefono" />
+        <p>WhatsApp / Teléfono</p>
+        <h2>{contacto.telefono}</h2>
+        <span>
+          Escríbenos
+          <Icono nombre="flecha" />
+        </span>
+      </a>
+      <a href={`mailto:${contacto.correo}`} class="contact-card">
+        <Icono nombre="mail" />
+        <p>Correo comercial</p>
+        <h2>{contacto.correo}</h2>
+        <span>
+          Enviar un correo
+          <Icono nombre="flecha" />
+        </span>
+      </a>
+      <section class="contact-card" id="ubicacion">
+        <Icono nombre="ubicacion" />
+        <p>Ubicación</p>
+        <h2>Consulta nuestra atención.</h2>
+        <span>Dirección y horarios por confirmar.</span>
+      </section>
+    </div>
+    <section class="help-section" id="ayuda">
+      <div>
+        <p class="eyebrow">ANTES DE ELEGIR</p>
+        <h2>Preguntas frecuentes</h2>
+        <p>Información clara para dar el siguiente paso.</p>
+      </div>
+      <div>
+        <details open>
+          <summary>¿Los precios y el stock están actualizados?</summary>
+          <p>
+            Los productos reales se consultan directamente del inventario al
+            navegar o recargar. La disponibilidad debe confirmarse al concretar
+            la compra.
+          </p>
+        </details>
+        <details id="envios">
+          <summary>¿Cómo recojo mi pedido?</summary>
+          <p>
+            Los pedidos son únicamente para recojo en tienda. Espera el estado
+            LISTO PARA RECOGER y presenta tu código. Confirma la ubicación con Struch antes de acercarte.
+          </p>
+        </details>
+        <details id="garantia">
+          <summary>¿Qué garantía tiene el producto?</summary>
+          <p>
+            Las condiciones dependen del producto. Comunícate con Struch para
+            confirmar plazo, cobertura y procedimiento antes de tu compra.
+          </p>
+        </details>
+        <details>
+          <summary>¿Puedo pagar o registrar un pedido en la web?</summary>
+          <p>
+            Regístrate o inicia sesión para confirmar tu pedido de recojo. Puedes
+            consultar su estado en Mis pedidos. No se realizan pagos online.
+          </p>
+        </details>
+        <details id="privacidad">
+          <summary>¿Qué información guarda esta web?</summary>
+          <p>
+            El carrito y los favoritos se guardan en este navegador. Al crear
+            una cuenta, tus datos de contacto y pedidos se guardan para gestionar el recojo.
+            El catálogo público no muestra datos internos de clientes, usuarios,
+            compras ni movimientos de inventario.
+          </p>
+        </details>
+      </div>
+    </section>
+  </div>
+</Layout>

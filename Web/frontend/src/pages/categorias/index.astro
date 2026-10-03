@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import Icono from "../../components/Icono.astro";
+import {
+  estadoCatalogo,
+  conteosCategorias,
+  type EstadoCatalogo,
+} from "../../lib/tienda";
+import { visualCategoria } from "../../lib/shared";
+let estado: EstadoCatalogo | undefined,
+  items: { nombre: string; slug: string; cantidad: number }[] = [],
+  error = false;
+try {
+  estado = await estadoCatalogo();
+  items = await conteosCategorias(estado);
+} catch {
+  error = true;
+  Astro.response.status = 503;
+}
+---
+
+<Layout title="Categorías" estado={estado || null}>
+  <div class="container page-shell">
+    <Breadcrumb titulo="Categorías" />
+    <div class="page-title">
+      <p class="eyebrow">ELIGE POR CATEGORÍA</p>
+      <h1>Todo empieza con el hardware correcto.</h1>
+      <p>Explora componentes, equipos y periféricos.</p>
+    </div>
+    {error ? (
+      <div class="notice">
+        <h2>Catálogo no disponible</h2>
+        <p>No pudimos consultar las categorías.</p>
+        <a href="/categorias" class="button">
+          Reintentar
+        </a>
+      </div>
+    ) : (
+      <div class="category-cards">
+        {items.length === 0 && (
+          <div class="empty-state">
+            <Icono nombre="box" />
+            <h2>No hay categorías disponibles todavía.</h2>
+            <p>Aparecerán al incorporar productos al catálogo.</p>
+          </div>
+        )}
+        {items.map((c) => (
+          <a href={`/categorias/${c.slug}`} class="category-card">
+            <div class="category-art">
+              <Icono nombre={visualCategoria(c.nombre)} />
+            </div>
+            <div>
+              <h2>{c.nombre}</h2>
+              <p>
+                {c.cantidad} {c.cantidad === 1 ? "producto" : "productos"}
+              </p>
+              <Icono nombre="flecha" />
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>

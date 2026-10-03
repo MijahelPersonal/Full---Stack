@@ -1,0 +1,68 @@
+---
+import Icono from "./Icono.astro";
+import { contacto } from "../lib/shared";
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="/">
+        STRUCH<span>.</span>
+      </a>
+      <p>
+        Hardware para construir,
+        <br />
+        trabajar y jugar.
+      </p>
+      <a href={`tel:+51${contacto.telefono}`} class="footer-contact">
+        <Icono nombre="telefono" />
+        {contacto.telefono}
+      </a>
+      <a href={`mailto:${contacto.correo}`} class="footer-email">
+        {contacto.correo}
+      </a>
+    </div>
+    <div>
+      <h3>Tienda</h3>
+      <a href="/productos">Productos</a>
+      <a href="/categorias">Categorías</a>
+      <a href="/ofertas">Ofertas Struch</a>
+      <a href="/marcas">Marcas</a>
+      <a href="/arma-tu-pc">Arma tu PC</a>
+    </div>
+    <div>
+      <h3>Ayuda</h3>
+      <a href="/contacto">Contacto</a>
+      <a href="/contacto#ayuda">Preguntas frecuentes</a>
+        <a href="/contacto#envios">Recojo en tienda</a>
+      <a href="/contacto#garantia">Garantía</a>
+    </div>
+    <div>
+      <h3>Mi cuenta</h3>
+      <a href="/cuenta">Iniciar sesión</a>
+      <a href="/cuenta?modo=registro">Registro</a>
+      <a href="/cuenta?seccion=pedidos">Mis pedidos</a>
+      <a href="/carrito">Carrito</a>
+    </div>
+    <div>
+      <h3>Conecta con Struch</h3>
+      <p>¿Necesitas orientación?</p>
+      <a
+        class="footer-whatsapp"
+        href={contacto.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Escríbenos por WhatsApp <Icono nombre="flecha" />
+      </a>
+      <small>Redes sociales: por confirmar.</small>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>
+      © {new Date().getFullYear()} Struch. Todos los derechos reservados.
+    </span>
+    <span>Precios en soles · Catálogo conectado al inventario</span>
+    <a href="/contacto#privacidad">Privacidad</a>
+  </div>
+</footer>

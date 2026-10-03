@@ -13,3 +13,12 @@ dist/
 .angular/
 release/
 uploads/
+backups/
+*.log
+
+# Tienda Astro
+.astro/
+.env
+.env.*
+!.env.example
+Web/tools/demo/.state/

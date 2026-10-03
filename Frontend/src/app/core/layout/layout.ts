@@ -12,7 +12,8 @@ export class Layout {
   plegado=false;
   enlaces=[
     {ruta:'/inicio',nombre:'Inicio',icono:'⌂'},
-    {ruta:'/nueva-venta',nombre:'Nueva venta',icono:'＋'},
+    {ruta:'/pedidos-web',nombre:'Pedidos web',icono:'▣'},
+    {ruta:'/nueva-venta',nombre:'Venta en tienda',icono:'＋'},
     {ruta:'/productos',nombre:'Productos',icono:'▦'},
     {ruta:'/inventario',nombre:'Inventario',icono:'▤'},
     {ruta:'/clientes',nombre:'Clientes',icono:'♙'},

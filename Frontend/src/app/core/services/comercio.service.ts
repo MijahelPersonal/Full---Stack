@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 import { RuntimeConfigService } from './runtime-config.service';
-import { Producto, ClienteComercial, Venta, VentaDetalle, Movimiento, InicioResumen } from '../models/comercio.model';
+import { Pedido, PedidoInterno, Reporte, Producto, ClienteComercial, Venta, VentaDetalle, Movimiento, InicioResumen } from '../models/comercio.model';
 @Injectable({providedIn:'root'})
 export class ComercioService {
  private api=inject(ApiService);
@@ -25,5 +25,10 @@ export class ComercioService {
  ventas(){return this.api.get<Venta[]>('/ventas');}
  detalle(id:string){return this.api.get<VentaDetalle>('/ventas/'+id);}
  vender(datos:unknown){return this.api.post<VentaDetalle>('/ventas',datos);}
+ pedidos(estado=""){return this.api.get<Pedido[]>("/pedidos-web",{estado});}
+ pedido(id:string){return this.api.get<PedidoInterno>("/pedidos-web/"+id);}
+ codigo(codigo:string){return this.api.get<PedidoInterno>("/pedidos-web/codigo",{codigo});}
+ accionPedido(id:string,accion:string){return this.api.post<Pedido>("/pedidos-web/"+id+"/"+accion,{});}
+ reporte(periodo:string){return this.api.get<Reporte>("/reportes/resumen",{periodo});}
  inicio(){return this.api.get<InicioResumen>('/inicio/resumen');}
 }

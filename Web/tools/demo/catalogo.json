@@ -1,0 +1,1211 @@
+[
+  {
+    "sku": "STR-DEMO-PC-GAM-001",
+    "nombre": "PC Gamer Struch Nova 5",
+    "categoria": "PCs armadas",
+    "marca": "Struch",
+    "precioCompra": 2441.26,
+    "precioVenta": 3299,
+    "stockInicial": 5,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "PC Gamer Struch Nova 5, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "16 GB",
+        "Almacenamiento": "SSD 1 TB"
+      },
+      "destacado": true,
+      "precioAnterior": null
+    },
+    "imagen": "pcs-armadas/pc-gamer-negra.webp"
+  },
+  {
+    "sku": "STR-DEMO-PC-GAM-002",
+    "nombre": "PC Gamer Struch Nova 7 White",
+    "categoria": "PCs armadas",
+    "marca": "Struch",
+    "precioCompra": 3477.26,
+    "precioVenta": 4699,
+    "stockInicial": 8,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "PC Gamer Struch Nova 7 White, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "32 GB",
+        "Almacenamiento": "SSD 1 TB"
+      },
+      "destacado": false,
+      "precioAnterior": 5403
+    },
+    "imagen": "pcs-armadas/pc-gamer-blanca.webp"
+  },
+  {
+    "sku": "STR-DEMO-PC-GAM-003",
+    "nombre": "PC Gamer Struch Aurora RGB",
+    "categoria": "PCs armadas",
+    "marca": "Struch",
+    "precioCompra": 4439.26,
+    "precioVenta": 5999,
+    "stockInicial": 10,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "PC Gamer Struch Aurora RGB, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "32 GB",
+        "Almacenamiento": "SSD 2 TB"
+      },
+      "destacado": true,
+      "precioAnterior": null
+    },
+    "imagen": "pcs-armadas/pc-rgb.webp"
+  },
+  {
+    "sku": "STR-DEMO-PC-WKS-001",
+    "nombre": "PC Workstation Struch Creator",
+    "categoria": "PCs armadas",
+    "marca": "Struch",
+    "precioCompra": 4809.26,
+    "precioVenta": 6499,
+    "stockInicial": 15,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "PC Workstation Struch Creator, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "64 GB",
+        "Almacenamiento": "SSD 2 TB"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "pcs-armadas/pc-edicion.webp"
+  },
+  {
+    "sku": "STR-DEMO-PC-OFF-001",
+    "nombre": "PC Office Struch Essential",
+    "categoria": "PCs armadas",
+    "marca": "Struch",
+    "precioCompra": 1405.26,
+    "precioVenta": 1899,
+    "stockInicial": 1,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "PC Office Struch Essential, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "16 GB",
+        "Almacenamiento": "SSD 500 GB"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "pcs-armadas/pc-oficina.webp"
+  },
+  {
+    "sku": "STR-DEMO-LAP-GAM-001",
+    "nombre": "Laptop Struch Pulse Gaming 15",
+    "categoria": "Laptops",
+    "marca": "Struch",
+    "precioCompra": 3329.26,
+    "precioVenta": 4499,
+    "stockInicial": 5,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Laptop Struch Pulse Gaming 15, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Pantalla": "15 pulgadas",
+        "Memoria": "16 GB",
+        "Almacenamiento": "SSD 1 TB"
+      },
+      "destacado": true,
+      "precioAnterior": null
+    },
+    "imagen": "laptops/laptop-gaming.webp"
+  },
+  {
+    "sku": "STR-DEMO-LAP-OFF-001",
+    "nombre": "Laptop Struch Work 15",
+    "categoria": "Laptops",
+    "marca": "Struch",
+    "precioCompra": 1849.26,
+    "precioVenta": 2499,
+    "stockInicial": 8,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Laptop Struch Work 15, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Pantalla": "15 pulgadas",
+        "Memoria": "16 GB",
+        "Almacenamiento": "SSD 500 GB"
+      },
+      "destacado": false,
+      "precioAnterior": 2873
+    },
+    "imagen": "laptops/laptop-trabajo.webp"
+  },
+  {
+    "sku": "STR-DEMO-LAP-SLM-001",
+    "nombre": "Laptop Struch Air 14",
+    "categoria": "Laptops",
+    "marca": "Struch",
+    "precioCompra": 2441.26,
+    "precioVenta": 3299,
+    "stockInicial": 10,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Laptop Struch Air 14, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Pantalla": "14 pulgadas",
+        "Memoria": "16 GB",
+        "Formato": "Ultradelgada"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "laptops/laptop-ultradelgada.webp"
+  },
+  {
+    "sku": "STR-DEMO-GPU-006-001",
+    "nombre": "GPU Struch Vision Compact 6 GB",
+    "categoria": "Tarjetas gráficas",
+    "marca": "Struch",
+    "precioCompra": 665.26,
+    "precioVenta": 899,
+    "stockInicial": 15,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "GPU Struch Vision Compact 6 GB, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "6 GB",
+        "Ventiladores": "1"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "tarjetas-graficas/gpu-compacta.webp"
+  },
+  {
+    "sku": "STR-DEMO-GPU-008-001",
+    "nombre": "GPU Struch Vision 8 GB",
+    "categoria": "Tarjetas gráficas",
+    "marca": "Struch",
+    "precioCompra": 1035.26,
+    "precioVenta": 1399,
+    "stockInicial": 20,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "GPU Struch Vision 8 GB, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "8 GB",
+        "Ventiladores": "2"
+      },
+      "destacado": true,
+      "precioAnterior": 1608
+    },
+    "imagen": "tarjetas-graficas/gpu-dos-ventiladores.webp"
+  },
+  {
+    "sku": "STR-DEMO-GPU-012-001",
+    "nombre": "GPU Struch Performance 12 GB",
+    "categoria": "Tarjetas gráficas",
+    "marca": "Struch",
+    "precioCompra": 1775.26,
+    "precioVenta": 2399,
+    "stockInicial": 5,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "GPU Struch Performance 12 GB, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "12 GB",
+        "Ventiladores": "3"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "tarjetas-graficas/gpu-tres-ventiladores.webp"
+  },
+  {
+    "sku": "STR-DEMO-GPU-016-001",
+    "nombre": "GPU Struch Performance White 16 GB",
+    "categoria": "Tarjetas gráficas",
+    "marca": "Struch",
+    "precioCompra": 2663.26,
+    "precioVenta": 3599,
+    "stockInicial": 0,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "GPU Struch Performance White 16 GB, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Memoria": "16 GB",
+        "Ventiladores": "3",
+        "Color": "Blanco"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "tarjetas-graficas/gpu-blanca.webp"
+  },
+  {
+    "sku": "STR-DEMO-CPU-006-001",
+    "nombre": "Procesador Struch Core 6",
+    "categoria": "Procesadores",
+    "marca": "Struch",
+    "precioCompra": 480.26,
+    "precioVenta": 649,
+    "stockInicial": 10,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Procesador Struch Core 6, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Núcleos": "6",
+        "Uso": "Equipos de escritorio"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "procesadores/procesador-plata.webp"
+  },
+  {
+    "sku": "STR-DEMO-CPU-008-001",
+    "nombre": "Procesador Struch Core 8",
+    "categoria": "Procesadores",
+    "marca": "Struch",
+    "precioCompra": 739.26,
+    "precioVenta": 999,
+    "stockInicial": 15,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Procesador Struch Core 8, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Núcleos": "8",
+        "Uso": "Gaming y productividad"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "procesadores/procesador-contactos.webp"
+  },
+  {
+    "sku": "STR-DEMO-CPU-012-001",
+    "nombre": "Procesador Struch Creator 12",
+    "categoria": "Procesadores",
+    "marca": "Struch",
+    "precioCompra": 1257.26,
+    "precioVenta": 1699,
+    "stockInicial": 3,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Procesador Struch Creator 12, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Núcleos": "12",
+        "Uso": "Estación de trabajo"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "procesadores/procesador-workstation.webp"
+  },
+  {
+    "sku": "STR-DEMO-MB-ATX-001",
+    "nombre": "Placa madre Struch Foundation ATX",
+    "categoria": "Placas madre",
+    "marca": "Struch",
+    "precioCompra": 443.26,
+    "precioVenta": 599,
+    "stockInicial": 5,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Placa madre Struch Foundation ATX, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "ATX",
+        "Uso": "Equipo de escritorio"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "placas-madre/placa-atx.webp"
+  },
+  {
+    "sku": "STR-DEMO-MB-MATX-001",
+    "nombre": "Placa madre Struch Foundation Micro ATX",
+    "categoria": "Placas madre",
+    "marca": "Struch",
+    "precioCompra": 295.26,
+    "precioVenta": 399,
+    "stockInicial": 8,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Placa madre Struch Foundation Micro ATX, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "Micro ATX",
+        "Uso": "Equipo compacto"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "placas-madre/placa-microatx.webp"
+  },
+  {
+    "sku": "STR-DEMO-MB-ITX-001",
+    "nombre": "Placa madre Struch Foundation Mini ITX",
+    "categoria": "Placas madre",
+    "marca": "Struch",
+    "precioCompra": 554.26,
+    "precioVenta": 749,
+    "stockInicial": 10,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Placa madre Struch Foundation Mini ITX, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "Mini ITX",
+        "Uso": "Equipo compacto"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "placas-madre/placa-mini-itx.webp"
+  },
+  {
+    "sku": "STR-DEMO-RAM-D4-001",
+    "nombre": "Kit memoria DDR4 16 GB 3200 MHz",
+    "categoria": "Memoria RAM",
+    "marca": "Struch",
+    "precioCompra": 139.86,
+    "precioVenta": 189,
+    "stockInicial": 15,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Kit memoria DDR4 16 GB 3200 MHz, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Capacidad total": "16 GB",
+        "Tipo": "DDR4",
+        "Frecuencia": "3200 MHz",
+        "Formato": "DIMM",
+        "Módulos": "2"
+      },
+      "destacado": false,
+      "precioAnterior": 217
+    },
+    "imagen": "memoria-ram/ram-negra.webp"
+  },
+  {
+    "sku": "STR-DEMO-RAM-D5-001",
+    "nombre": "Kit memoria DDR5 32 GB 6000 MHz White",
+    "categoria": "Memoria RAM",
+    "marca": "Struch",
+    "precioCompra": 317.46,
+    "precioVenta": 429,
+    "stockInicial": 20,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Kit memoria DDR5 32 GB 6000 MHz White, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Capacidad total": "32 GB",
+        "Tipo": "DDR5",
+        "Frecuencia": "6000 MHz",
+        "Formato": "DIMM",
+        "Módulos": "2"
+      },
+      "destacado": true,
+      "precioAnterior": null
+    },
+    "imagen": "memoria-ram/ram-blanca.webp"
+  },
+  {
+    "sku": "STR-DEMO-RAM-SOD-001",
+    "nombre": "Kit memoria para laptop DDR4 16 GB",
+    "categoria": "Memoria RAM",
+    "marca": "Struch",
+    "precioCompra": 154.66,
+    "precioVenta": 209,
+    "stockInicial": 1,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Kit memoria para laptop DDR4 16 GB, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Capacidad total": "16 GB",
+        "Tipo": "DDR4",
+        "Formato": "SODIMM",
+        "Módulos": "2"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "memoria-ram/ram-sodimm.webp"
+  },
+  {
+    "sku": "STR-DEMO-SSD-NVME-001",
+    "nombre": "SSD NVMe 1 TB Gen4",
+    "categoria": "Almacenamiento",
+    "marca": "Struch",
+    "precioCompra": 243.46,
+    "precioVenta": 329,
+    "stockInicial": 8,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "SSD NVMe 1 TB Gen4, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Capacidad": "1 TB",
+        "Formato": "M.2",
+        "Interfaz": "NVMe Gen4"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "almacenamiento/ssd-nvme.webp"
+  },
+  {
+    "sku": "STR-DEMO-SSD-HS-001",
+    "nombre": "SSD NVMe 2 TB con disipador",
+    "categoria": "Almacenamiento",
+    "marca": "Struch",
+    "precioCompra": 443.26,
+    "precioVenta": 599,
+    "stockInicial": 10,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "SSD NVMe 2 TB con disipador, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Capacidad": "2 TB",
+        "Formato": "M.2",
+        "Refrigeración": "Disipador integrado"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "almacenamiento/ssd-disipador.webp"
+  },
+  {
+    "sku": "STR-DEMO-SSD-SATA-001",
+    "nombre": "SSD SATA 500 GB",
+    "categoria": "Almacenamiento",
+    "marca": "Struch",
+    "precioCompra": 125.06,
+    "precioVenta": 169,
+    "stockInicial": 15,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "SSD SATA 500 GB, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Capacidad": "500 GB",
+        "Formato": "2.5 pulgadas",
+        "Interfaz": "SATA"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "almacenamiento/ssd-sata.webp"
+  },
+  {
+    "sku": "STR-DEMO-HDD-2TB-001",
+    "nombre": "Disco duro 2 TB para escritorio",
+    "categoria": "Almacenamiento",
+    "marca": "Struch",
+    "precioCompra": 176.86,
+    "precioVenta": 239,
+    "stockInicial": 20,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Disco duro 2 TB para escritorio, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Capacidad": "2 TB",
+        "Formato": "3.5 pulgadas",
+        "Interfaz": "SATA"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/hdd.webp"
+  },
+  {
+    "sku": "STR-DEMO-MON-GAM-001",
+    "nombre": "Monitor Gaming 24 pulgadas 180 Hz",
+    "categoria": "Monitores",
+    "marca": "Struch",
+    "precioCompra": 517.26,
+    "precioVenta": 699,
+    "stockInicial": 5,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Monitor Gaming 24 pulgadas 180 Hz, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Pantalla": "24 pulgadas",
+        "Resolución": "Full HD",
+        "Frecuencia": "180 Hz"
+      },
+      "destacado": true,
+      "precioAnterior": 803
+    },
+    "imagen": "monitores/monitor-gamer.webp"
+  },
+  {
+    "sku": "STR-DEMO-MON-IPS-001",
+    "nombre": "Monitor IPS 27 pulgadas QHD",
+    "categoria": "Monitores",
+    "marca": "Struch",
+    "precioCompra": 665.26,
+    "precioVenta": 899,
+    "stockInicial": 8,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Monitor IPS 27 pulgadas QHD, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Pantalla": "27 pulgadas",
+        "Panel": "IPS",
+        "Resolución": "QHD"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "monitores/monitor-oficina.webp"
+  },
+  {
+    "sku": "STR-DEMO-MON-UW-001",
+    "nombre": "Monitor UltraWide curvo 34 pulgadas",
+    "categoria": "Monitores",
+    "marca": "Struch",
+    "precioCompra": 1257.26,
+    "precioVenta": 1699,
+    "stockInicial": 0,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Monitor UltraWide curvo 34 pulgadas, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Pantalla": "34 pulgadas",
+        "Formato": "UltraWide curvo"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "monitores/monitor-ultrawide.webp"
+  },
+  {
+    "sku": "STR-DEMO-TEC-MEC-001",
+    "nombre": "Teclado mecánico compacto Struch Type",
+    "categoria": "Teclados",
+    "marca": "Struch",
+    "precioCompra": 169.46,
+    "precioVenta": 229,
+    "stockInicial": 15,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Teclado mecánico compacto Struch Type, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Tipo": "Mecánico",
+        "Formato": "Compacto",
+        "Color": "Negro"
+      },
+      "destacado": true,
+      "precioAnterior": null
+    },
+    "imagen": "teclados/teclado-mecanico.webp"
+  },
+  {
+    "sku": "STR-DEMO-TEC-MEC-002",
+    "nombre": "Teclado mecánico compacto Struch Type White",
+    "categoria": "Teclados",
+    "marca": "Struch",
+    "precioCompra": 191.66,
+    "precioVenta": 259,
+    "stockInicial": 20,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Teclado mecánico compacto Struch Type White, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Tipo": "Mecánico",
+        "Formato": "Compacto",
+        "Color": "Blanco"
+      },
+      "destacado": false,
+      "precioAnterior": 297
+    },
+    "imagen": "teclados/teclado-blanco.webp"
+  },
+  {
+    "sku": "STR-DEMO-TEC-FULL-001",
+    "nombre": "Teclado completo Struch Office",
+    "categoria": "Teclados",
+    "marca": "Struch",
+    "precioCompra": 65.86,
+    "precioVenta": 89,
+    "stockInicial": 5,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Teclado completo Struch Office, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "Completo",
+        "Teclado numérico": "Sí",
+        "Color": "Negro"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "teclados/teclado-completo.webp"
+  },
+  {
+    "sku": "STR-DEMO-TEC-WL-001",
+    "nombre": "Teclado inalámbrico Struch Slim",
+    "categoria": "Teclados",
+    "marca": "Struch",
+    "precioCompra": 110.26,
+    "precioVenta": 149,
+    "stockInicial": 8,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Teclado inalámbrico Struch Slim, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "Inalámbrica",
+        "Perfil": "Delgado",
+        "Color": "Blanco"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "teclados/teclado-inalambrico.webp"
+  },
+  {
+    "sku": "STR-DEMO-MOU-GAM-001",
+    "nombre": "Mouse Gaming Struch Precision",
+    "categoria": "Mouse",
+    "marca": "Struch",
+    "precioCompra": 73.26,
+    "precioVenta": 99,
+    "stockInicial": 10,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Mouse Gaming Struch Precision, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "Cable",
+        "Uso": "Gaming",
+        "Color": "Negro"
+      },
+      "destacado": true,
+      "precioAnterior": null
+    },
+    "imagen": "mouse/mouse-gamer.webp"
+  },
+  {
+    "sku": "STR-DEMO-MOU-GAM-002",
+    "nombre": "Mouse Gaming Struch Precision White",
+    "categoria": "Mouse",
+    "marca": "Struch",
+    "precioCompra": 132.46,
+    "precioVenta": 179,
+    "stockInicial": 15,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Mouse Gaming Struch Precision White, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "Inalámbrica",
+        "Uso": "Gaming",
+        "Color": "Blanco"
+      },
+      "destacado": false,
+      "precioAnterior": 205
+    },
+    "imagen": "mouse/mouse-blanco.webp"
+  },
+  {
+    "sku": "STR-DEMO-MOU-ERG-001",
+    "nombre": "Mouse vertical Struch Ergo",
+    "categoria": "Mouse",
+    "marca": "Struch",
+    "precioCompra": 117.66,
+    "precioVenta": 159,
+    "stockInicial": 20,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Mouse vertical Struch Ergo, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "Inalámbrica",
+        "Formato": "Vertical ergonómico"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "mouse/mouse-ergonomico.webp"
+  },
+  {
+    "sku": "STR-DEMO-MOU-OFF-001",
+    "nombre": "Mouse inalámbrico Struch Office",
+    "categoria": "Mouse",
+    "marca": "Struch",
+    "precioCompra": 51.06,
+    "precioVenta": 69,
+    "stockInicial": 5,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Mouse inalámbrico Struch Office, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "Inalámbrica",
+        "Uso": "Oficina",
+        "Color": "Plata"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "mouse/mouse-inalambrico.webp"
+  },
+  {
+    "sku": "STR-DEMO-AUD-GAM-001",
+    "nombre": "Audífonos Gaming Struch Sound",
+    "categoria": "Audífonos",
+    "marca": "Struch",
+    "precioCompra": 132.46,
+    "precioVenta": 179,
+    "stockInicial": 8,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Audífonos Gaming Struch Sound, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "Over-ear",
+        "Micrófono": "Integrado",
+        "Color": "Negro"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "audifonos/audifonos-gamer.webp"
+  },
+  {
+    "sku": "STR-DEMO-AUD-GAM-002",
+    "nombre": "Audífonos Gaming Struch Sound White",
+    "categoria": "Audífonos",
+    "marca": "Struch",
+    "precioCompra": 162.06,
+    "precioVenta": 219,
+    "stockInicial": 10,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Audífonos Gaming Struch Sound White, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "Over-ear",
+        "Micrófono": "Integrado",
+        "Color": "Blanco"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "audifonos/audifonos-blancos.webp"
+  },
+  {
+    "sku": "STR-DEMO-AUD-WL-001",
+    "nombre": "Audífonos inalámbricos Struch Air Sound",
+    "categoria": "Audífonos",
+    "marca": "Struch",
+    "precioCompra": 221.26,
+    "precioVenta": 299,
+    "stockInicial": 15,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Audífonos inalámbricos Struch Air Sound, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "Over-ear",
+        "Conexión": "Inalámbrica"
+      },
+      "destacado": false,
+      "precioAnterior": 343
+    },
+    "imagen": "audifonos/audifonos-inalambricos.webp"
+  },
+  {
+    "sku": "STR-DEMO-COOL-AIR-001",
+    "nombre": "Cooler de torre Struch Breeze",
+    "categoria": "Refrigeración",
+    "marca": "Struch",
+    "precioCompra": 110.26,
+    "precioVenta": 149,
+    "stockInicial": 4,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Cooler de torre Struch Breeze, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Tipo": "Aire",
+        "Formato": "Torre",
+        "Ventiladores": "1"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "refrigeracion/cooler-torre.webp"
+  },
+  {
+    "sku": "STR-DEMO-COOL-AIO-001",
+    "nombre": "Refrigeración líquida Struch Flow 240",
+    "categoria": "Refrigeración",
+    "marca": "Struch",
+    "precioCompra": 295.26,
+    "precioVenta": 399,
+    "stockInicial": 5,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Refrigeración líquida Struch Flow 240, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Tipo": "Líquida AIO",
+        "Radiador": "240 mm",
+        "Ventiladores": "2"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "refrigeracion/refrigeracion-liquida.webp"
+  },
+  {
+    "sku": "STR-DEMO-PSU-750-001",
+    "nombre": "Fuente modular Struch Power 750 W",
+    "categoria": "Fuentes de poder",
+    "marca": "Struch",
+    "precioCompra": 258.26,
+    "precioVenta": 349,
+    "stockInicial": 8,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Fuente modular Struch Power 750 W, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Potencia": "750 W",
+        "Formato": "ATX",
+        "Cableado": "Modular"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "fuentes/fuente-modular.webp"
+  },
+  {
+    "sku": "STR-DEMO-PSU-550-001",
+    "nombre": "Fuente compacta Struch Power 550 W",
+    "categoria": "Fuentes de poder",
+    "marca": "Struch",
+    "precioCompra": 206.46,
+    "precioVenta": 279,
+    "stockInicial": 10,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Fuente compacta Struch Power 550 W, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Potencia": "550 W",
+        "Formato": "SFX"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "fuentes/fuente-compacta.webp"
+  },
+  {
+    "sku": "STR-DEMO-CASE-ATX-001",
+    "nombre": "Case Struch Frame ATX Black",
+    "categoria": "Cases",
+    "marca": "Struch",
+    "precioCompra": 184.26,
+    "precioVenta": 249,
+    "stockInicial": 15,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Case Struch Frame ATX Black, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "ATX",
+        "Color": "Negro",
+        "Panel lateral": "Vidrio"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "cases/case-negro.webp"
+  },
+  {
+    "sku": "STR-DEMO-CASE-ATX-002",
+    "nombre": "Case Struch Frame ATX White",
+    "categoria": "Cases",
+    "marca": "Struch",
+    "precioCompra": 213.86,
+    "precioVenta": 289,
+    "stockInicial": 20,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Case Struch Frame ATX White, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "ATX",
+        "Color": "Blanco",
+        "Panel lateral": "Vidrio"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "cases/case-blanco.webp"
+  },
+  {
+    "sku": "STR-DEMO-CASE-MATX-001",
+    "nombre": "Case compacto Struch Frame Mesh",
+    "categoria": "Cases",
+    "marca": "Struch",
+    "precioCompra": 147.26,
+    "precioVenta": 199,
+    "stockInicial": 2,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Case compacto Struch Frame Mesh, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Formato": "Compacto",
+        "Frontal": "Malla",
+        "Color": "Gris oscuro"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "cases/case-compacto.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-VID-001",
+    "nombre": "Adaptador de video USB-C a HDMI",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 43.66,
+    "precioVenta": 59,
+    "stockInicial": 8,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Adaptador de video USB-C a HDMI, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conectores": "USB-C y HDMI",
+        "Uso": "Salida de video"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/adaptador-video.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-USB-001",
+    "nombre": "Cable USB-C Struch Link",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 25.9,
+    "precioVenta": 35,
+    "stockInicial": 10,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Cable USB-C Struch Link, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "USB-C",
+        "Color": "Negro"
+      },
+      "destacado": false,
+      "precioAnterior": 40
+    },
+    "imagen": "accesorios/cable-usb.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-HUB-001",
+    "nombre": "Hub USB-C Struch Connect",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 95.46,
+    "precioVenta": 129,
+    "stockInicial": 15,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Hub USB-C Struch Connect, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "USB-C",
+        "Uso": "Expansión de puertos"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/hub-usb.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-PAD-001",
+    "nombre": "Mando inalámbrico Struch Play",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 110.26,
+    "precioVenta": 149,
+    "stockInicial": 20,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Mando inalámbrico Struch Play, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "Inalámbrica",
+        "Uso": "Gaming"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/mando.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-MIC-001",
+    "nombre": "Micrófono USB Struch Voice",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 139.86,
+    "precioVenta": 189,
+    "stockInicial": 5,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Micrófono USB Struch Voice, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "USB",
+        "Soporte": "De escritorio"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/microfono-usb.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-MAT-001",
+    "nombre": "Mousepad Struch Surface",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 28.86,
+    "precioVenta": 39,
+    "stockInicial": 8,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Mousepad Struch Surface, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Superficie": "Tela",
+        "Forma": "Rectangular"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/mousepad.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-SPK-001",
+    "nombre": "Parlantes de escritorio Struch Duo",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 88.06,
+    "precioVenta": 119,
+    "stockInicial": 10,
+    "stockMinimo": 2,
+    "activo": true,
+    "web": {
+      "descripcion": "Parlantes de escritorio Struch Duo, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Presentación": "Par de parlantes",
+        "Uso": "Escritorio"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/parlantes.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-NET-001",
+    "nombre": "Router inalámbrico Struch Home",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 147.26,
+    "precioVenta": 199,
+    "stockInicial": 15,
+    "stockMinimo": 3,
+    "activo": true,
+    "web": {
+      "descripcion": "Router inalámbrico Struch Home, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Antenas": "4",
+        "Uso": "Red doméstica"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/router.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-STND-001",
+    "nombre": "Soporte para audífonos Struch Stand",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 36.26,
+    "precioVenta": 49,
+    "stockInicial": 3,
+    "stockMinimo": 4,
+    "activo": true,
+    "web": {
+      "descripcion": "Soporte para audífonos Struch Stand, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Uso": "Audífonos",
+        "Formato": "De escritorio"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/soporte-audifonos.webp"
+  },
+  {
+    "sku": "STR-DEMO-ACC-CAM-001",
+    "nombre": "Webcam USB Struch Meet",
+    "categoria": "Accesorios",
+    "marca": "Struch",
+    "precioCompra": 102.86,
+    "precioVenta": 139,
+    "stockInicial": 5,
+    "stockMinimo": 5,
+    "activo": true,
+    "web": {
+      "descripcion": "Webcam USB Struch Meet, una opción práctica para tu equipo y tu espacio de trabajo. Catálogo de demostración: especificaciones y precio referenciales; imagen genérica ilustrativa.",
+      "especificaciones": {
+        "Conexión": "USB",
+        "Soporte": "Clip integrado"
+      },
+      "destacado": false,
+      "precioAnterior": null
+    },
+    "imagen": "accesorios/webcam.webp"
+  }
+]

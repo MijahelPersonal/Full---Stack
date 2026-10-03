@@ -1,0 +1,19 @@
+---
+interface Props {
+  titulo: string;
+  categoria?: { nombre: string; href: string };
+}
+const { titulo, categoria } = Astro.props;
+---
+
+<nav class="breadcrumb" aria-label="Ruta">
+  <a href="/">Inicio</a>
+  <span>/</span>
+  {categoria && (
+    <>
+      <a href={categoria.href}>{categoria.nombre}</a>
+      <span>/</span>
+    </>
+  )}
+  <span aria-current="page">{titulo}</span>
+</nav>

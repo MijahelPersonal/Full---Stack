@@ -18,12 +18,16 @@ describe('POS',()=>{
   expect(componente.carrito()[0].cantidad).toBe(2);
   componente.cantidad(producto,1.5);expect(componente.carrito()[0].cantidad).toBe(2);
  });
- it('requiere cliente y envía solo referencias y cantidades',()=>{
-  componente.agregar(producto);componente.finalizar();expect(vender).not.toHaveBeenCalled();
+ it('envía solo referencias y cantidades para un cliente seleccionado',()=>{
+  componente.agregar(producto);
   componente.clienteId='c1';componente.cantidad(producto,2);const clave=componente.clave;
   componente.finalizar();
   expect(vender).toHaveBeenCalledWith({clave,clienteId:'c1',lineas:[{productoId:'p1',cantidad:2}]});
   expect(componente.carrito()).toEqual([]);
+ });
+ it('permite público general sin cliente registrado',()=>{
+  componente.agregar(producto);const clave=componente.clave;componente.finalizar();
+  expect(vender).toHaveBeenCalledWith({clave,clienteId:null,lineas:[{productoId:'p1',cantidad:1}]});
  });
  it('calcula el total y permite eliminar una línea',()=>{
   componente.cantidad(producto,2);expect(componente.total()).toBe(178);

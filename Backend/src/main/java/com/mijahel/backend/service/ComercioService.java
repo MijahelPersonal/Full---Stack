@@ -34,6 +34,12 @@ public class ComercioService {
    if(id!=null && r.stockInicial()!=0) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El stock se modifica desde Inventario");
    p.setSku(r.sku().trim());p.setNombre(r.nombre().trim());p.setCategoria(r.categoria().trim());p.setMarca(r.marca().trim());
    p.setPrecioCompra(r.precioCompra());p.setPrecioVenta(r.precioVenta());p.setStockMinimo(r.stockMinimo());p.setActivo(r.activo());
+   if(r.web()!=null){
+     if(r.web().precioAnterior()!=null && r.web().precioAnterior().compareTo(r.precioVenta())<=0)
+       throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"El precio anterior debe ser mayor al precio de venta");
+     p.setDescripcion(r.web().descripcion().trim());p.setEspecificaciones(r.web().especificaciones());
+     p.setDestacado(r.web().destacado());p.setPrecioAnterior(r.web().precioAnterior());
+   }
    productos.saveAndFlush(p);
    if(id==null && r.stockInicial()>0) mover(p,"ENTRADA",r.stockInicial(),"Stock inicial",null,usuario);
    return p;
@@ -58,13 +64,13 @@ public class ComercioService {
      Venta v=existente.get();
      if(!v.getVendedorId().equals(usuario.getId())) throw new IllegalStateException("La referencia ya está utilizada");
      List<DetalleVenta> lineas=detalles.findByVentaId(v.getId());
-     boolean coincide=v.getClienteId().equals(r.clienteId()) && lineas.size()==r.lineas().size()
+     boolean coincide=Objects.equals(v.getClienteId(),r.clienteId()) && lineas.size()==r.lineas().size()
        && lineas.stream().allMatch(d->r.lineas().stream().anyMatch(l->l.productoId().equals(d.getProductoId())&&l.cantidad()==d.getCantidad()));
      if(!coincide) throw new IllegalStateException("La referencia corresponde a otra venta; conserva el borrador original o inicia una nueva venta");
      return new VentaDetalle(v,lineas);
    }
-   Cliente c=clientes.bloquear(r.clienteId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente no encontrado"));
-   if(!c.isActivo()) throw new IllegalStateException("El cliente está inactivo");
+   Cliente c=r.clienteId()==null?null:clientes.bloquear(r.clienteId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente no encontrado"));
+   if(c!=null&&!c.isActivo()) throw new IllegalStateException("El cliente está inactivo");
    Map<UUID,Integer> cantidades=new TreeMap<>();
    for(LineaRequest l:r.lineas()){
      if(cantidades.containsKey(l.productoId())) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Producto duplicado");
@@ -78,7 +84,7 @@ public class ComercioService {
      seleccion.add(p);total=total.add(p.getPrecioVenta().multiply(BigDecimal.valueOf(entry.getValue())));
    }
    Venta v=new Venta();v.setClave(r.clave());v.setNumero("V-"+r.clave().toString().toUpperCase());
-   v.setClienteId(c.getId());v.setClienteNombre(c.getNombre());v.setVendedorId(usuario.getId());v.setVendedorNombre(usuario.getNombre());
+   v.setClienteId(c==null?null:c.getId());v.setClienteNombre(c==null?"Público general":c.getNombre());v.setOrigen("POS");v.setVendedorId(usuario.getId());v.setVendedorNombre(usuario.getNombre());
    v.setTotal(total);v.setEstado("COMPLETADA");v.setFecha(LocalDateTime.now());ventas.saveAndFlush(v);
    List<DetalleVenta> resultado=new ArrayList<>();
    for(Producto p:seleccion){

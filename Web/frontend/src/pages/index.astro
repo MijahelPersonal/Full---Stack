@@ -1,0 +1,183 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Icono from "../components/Icono.astro";
+import Tarjeta from "../components/Tarjeta.astro";
+import Beneficios from "../components/Beneficios.astro";
+import {
+  estadoCatalogo,
+  listarProductos,
+  type EstadoCatalogo,
+} from "../lib/tienda";
+import { visualCategoria, slugCategoria } from "../lib/shared";
+import type { Pagina } from "../lib/catalogo";
+let estado: EstadoCatalogo | undefined,
+  seleccion: Pagina | undefined,
+  ofertas: Pagina | undefined,
+  nuevos: Pagina | undefined,
+  error = false;
+try {
+  estado = await estadoCatalogo();
+  [seleccion, ofertas, nuevos] = await Promise.all([
+    listarProductos(
+      estado,
+      new URLSearchParams({ tamano: "8", orden: "destacados" }),
+    ),
+    listarProductos(
+      estado,
+      new URLSearchParams({ tamano: "4", oferta: "true" }),
+    ),
+    listarProductos(
+      estado,
+      new URLSearchParams({ tamano: "4", orden: "recientes" }),
+    ),
+  ]);
+} catch {
+  error = true;
+  Astro.response.status = 503;
+}
+---
+
+<Layout title="Hardware para tu siguiente nivel" estado={estado || null}>
+  <Hero hayOfertas={Boolean(ofertas?.items.length)} />
+  <section class="quick-categories container" aria-label="Categorías rápidas">
+    {estado?.categorias.map((c) => (
+      <a href={`/categorias/${slugCategoria(c)}`}>
+        <Icono nombre={visualCategoria(c)} />
+        <span>{c}</span>
+      </a>
+    ))}
+  </section>
+  {error && (
+    <div class="container notice home-error">
+      <h2>No pudimos cargar los productos en este momento.</h2>
+      <p>El inventario no está disponible en este momento.</p>
+      <a href="/" class="button">
+        Reintentar
+      </a>
+    </div>
+  )}
+  {seleccion && (
+    <section class="container product-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SELECCIÓN STRUCH</p>
+          <h2>
+            Productos destacados<span>.</span>
+          </h2>
+        </div>
+        <a href="/productos?orden=destacados">
+          Ver todos
+          <Icono nombre="flecha" />
+        </a>
+      </div>
+      <div class="product-grid">
+        {seleccion.items.length === 0 && (
+          <div class="empty-state">
+            <Icono nombre="box" />
+            <h3>No hay productos disponibles todavía.</h3>
+            <p>Pronto encontrarás aquí el catálogo de STRUCH.</p>
+          </div>
+        )}
+        {seleccion.items.map((p) => (
+          <Tarjeta producto={p} />
+        ))}
+      </div>
+    </section>
+  )}
+  {ofertas && ofertas.items.length > 0 && (
+    <section class="offers-section">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">DA EL SIGUIENTE PASO</p>
+            <h2>
+              Ofertas Struch<span>.</span>
+            </h2>
+          </div>
+          <a href="/ofertas">
+            Ver ofertas
+            <Icono nombre="flecha" />
+          </a>
+        </div>
+        <div class="product-grid">
+          {ofertas.items.map((p) => (
+            <Tarjeta producto={p} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+  {nuevos && nuevos.items.length > 0 && (
+    <section class="container product-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">LO MÁS RECIENTE</p>
+          <h2>
+            Nuevos ingresos<span>.</span>
+          </h2>
+        </div>
+        <a href="/novedades">
+          Ver novedades
+          <Icono nombre="flecha" />
+        </a>
+      </div>
+      <div class="product-grid">
+        {nuevos.items.map((p) => (
+          <Tarjeta producto={p} />
+        ))}
+      </div>
+    </section>
+  )}
+  <section class="container pc-banner">
+    <div>
+      <p class="eyebrow">TU EQUIPO, A TU MANERA</p>
+      <h2>
+        ARMA TU <span>PC.</span>
+      </h2>
+      <p>Elige los componentes para construir tu equipo.</p>
+      <a href="/arma-tu-pc" class="button">
+        Comenzar configuración
+        <Icono nombre="flecha" />
+      </a>
+    </div>
+    <div class="pc-parts">
+      {[
+        ["cpu", "Procesador"],
+        ["board", "Placa madre"],
+        ["ram", "RAM"],
+        ["gpu", "GPU"],
+        ["ssd", "Almacenamiento"],
+        ["box", "Fuente"],
+        ["case", "Case"],
+      ].map(([icono, nombre]) => (
+        <span>
+          <Icono nombre={icono} />
+          {nombre}
+        </span>
+      ))}
+    </div>
+  </section>
+  {(estado?.marcas.length ?? 0) > 0 && (
+    <section class="container brands-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">HARDWARE QUE CONOCES</p>
+          <h2>
+            Explora por marca<span>.</span>
+          </h2>
+        </div>
+        <a href="/marcas">
+          Todas las marcas
+          <Icono nombre="flecha" />
+        </a>
+      </div>
+      <div class="brand-strip">
+        {estado?.marcas.map((m) => (
+          <a href={`/productos?marca=${encodeURIComponent(m)}`}>{m}</a>
+        ))}
+      </div>
+    </section>
+  )}
+  <Beneficios />
+</Layout>

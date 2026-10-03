@@ -1,0 +1,271 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import Imagen from "../../components/Imagen.astro";
+import Icono from "../../components/Icono.astro";
+import {
+  detalleProducto,
+  estadoCatalogo,
+  type EstadoCatalogo,
+} from "../../lib/tienda";
+import { ApiError, type Producto } from "../../lib/catalogo";
+import { dinero, descuento, slugCategoria } from "../../lib/shared";
+let p: Producto | undefined,
+  estado: EstadoCatalogo | undefined,
+  error = "";
+try {
+  [p, estado] = await Promise.all([
+    detalleProducto(Astro.params.slug || ""),
+    estadoCatalogo(),
+  ]);
+} catch (e) {
+  const missing = e instanceof ApiError && e.status === 404;
+  Astro.response.status = missing ? 404 : 503;
+  error = missing
+    ? "Este producto no está disponible."
+    : "No pudimos conectar con el catálogo.";
+}
+const rebaja = p ? descuento(p) : 0,
+  datos = p
+    ? JSON.stringify({
+        ...p,
+        descripcion: undefined,
+        especificaciones: undefined,
+      })
+    : "";
+---
+
+<Layout
+  title={p?.nombre || "Producto no disponible"}
+  description={p?.descripcion?.slice(0, 160)}
+  estado={estado || null}
+>
+  <div class="container page-shell">
+    {p ? (
+      <>
+        <Breadcrumb
+          titulo={p.nombre}
+          categoria={{ nombre: "Productos", href: "/productos" }}
+        />
+        <div class="product-detail">
+          <section class="product-gallery">
+            <div class="gallery-main">
+              <Imagen producto={p} principal />
+              {rebaja > 0 && <span class="offer-badge">−{rebaja}%</span>}
+            </div>
+            <div class="gallery-thumbnails">
+              <span class="gallery-thumbnail selected">
+                <Imagen producto={p} />
+              </span>
+              <small>Imagen del producto</small>
+            </div>
+          </section>
+          <section class="product-info">
+            <p class="product-brand">{p.marca}</p>
+            <h1>{p.nombre}</h1>
+            <div class="product-reviews">
+              <span aria-hidden="true">
+                {[1, 2, 3, 4, 5].map(() => (
+                  <Icono nombre="estrella" />
+                ))}
+              </span>
+              <span>Sin reseñas</span>
+              <a href="#product-tabs">Ver características</a>
+            </div>
+            <a
+              class="detail-category"
+              href={`/categorias/${slugCategoria(p.categoria)}`}
+            >
+              {p.categoria}
+            </a>
+            <div class="detail-price">
+              {rebaja > 0 && (
+                <div>
+                  <del>{dinero(p.precioAnterior!)}</del>
+                  <span class="discount-label">
+                    Ahorra {dinero(p.precioAnterior! - p.precio)}
+                  </span>
+                </div>
+              )}
+              <strong>{dinero(p.precio)}</strong>
+              <small>Precio en soles</small>
+            </div>
+            <p class:list={["stock", { "sold-out": p.stock === 0 }]}>
+              <span></span>
+              {p.stock > 0
+                ? `En stock · ${p.stock} unidades disponibles`
+                : "Sin stock"}
+            </p>
+            <div class="buy-controls">
+              <label class="sr-only" for="product-quantity">
+                Cantidad
+              </label>
+              <div class="quantity-control">
+                <button
+                  type="button"
+                  data-detail-minus
+                  aria-label="Reducir cantidad"
+                >
+                  −
+                </button>
+                <input
+                  id="product-quantity"
+                  type="number"
+                  min="1"
+                  max={Math.min(p.stock, 999) || 1}
+                  value="1"
+                  step="1"
+                />
+                <button
+                  type="button"
+                  data-detail-plus
+                  aria-label="Aumentar cantidad"
+                >
+                  +
+                </button>
+              </div>
+              <button
+                class="button"
+                type="button"
+                disabled={p.stock === 0}
+                data-add-cart={datos}
+                data-use-quantity
+              >
+                <Icono nombre="carrito" />
+                Agregar al carrito
+              </button>
+            </div>
+            <button
+              type="button"
+              class="button button-outline buy-now"
+              disabled={p.stock === 0}
+              data-add-cart={datos}
+              data-use-quantity
+              data-buy-now
+            >
+              Comprar ahora
+              <Icono nombre="flecha" />
+            </button>
+            <div class="product-assurances">
+              <a href="/contacto#envios">
+                <Icono nombre="envio" />
+                Consulta envío
+              </a>
+              <a href="/contacto#garantia">
+                <Icono nombre="escudo" />
+                Consulta garantía
+              </a>
+              <a href="/contacto">
+                <Icono nombre="soporte" />
+                ¿Necesitas ayuda?
+              </a>
+            </div>
+          </section>
+        </div>
+        <section class="product-tabs" id="product-tabs" data-tabs>
+          <div role="tablist" aria-label="Información del producto">
+            {[
+              ["descripcion", "Descripción"],
+              ["caracteristicas", "Características"],
+              ["especificaciones", "Especificaciones"],
+              ["garantia", "Garantía"],
+            ].map(([id, texto], i) => (
+              <button
+                role="tab"
+                id={`tab-${id}`}
+                aria-controls={`panel-${id}`}
+                aria-selected={i === 0}
+                tabindex={i === 0 ? 0 : -1}
+                type="button"
+                data-tab={id}
+              >
+                {texto}
+              </button>
+            ))}
+          </div>
+          <section
+            id="panel-descripcion"
+            role="tabpanel"
+            aria-labelledby="tab-descripcion"
+            data-tab-panel="descripcion"
+          >
+            <h2>Descripción del producto</h2>
+            <p class="product-description">
+              {p.descripcion ||
+                "La descripción de este producto todavía no ha sido publicada."}
+            </p>
+          </section>
+          <section
+            id="panel-caracteristicas"
+            role="tabpanel"
+            aria-labelledby="tab-caracteristicas"
+            data-tab-panel="caracteristicas"
+            hidden
+          >
+            <h2>Características generales</h2>
+            <dl class="specs">
+              <div>
+                <dt>Marca</dt>
+                <dd>{p.marca}</dd>
+              </div>
+              <div>
+                <dt>Categoría</dt>
+                <dd>{p.categoria}</dd>
+              </div>
+              <div>
+                <dt>Producto</dt>
+                <dd>{p.nombre}</dd>
+              </div>
+            </dl>
+          </section>
+          <section
+            id="panel-especificaciones"
+            role="tabpanel"
+            aria-labelledby="tab-especificaciones"
+            data-tab-panel="especificaciones"
+            hidden
+          >
+            <h2>Especificaciones técnicas</h2>
+            {Object.keys(p.especificaciones || {}).length > 0 ? (
+              <dl class="specs">
+                {Object.entries(p.especificaciones || {}).map(([k, v]) => (
+                  <div>
+                    <dt>{k}</dt>
+                    <dd>{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : (
+              <p>Las especificaciones todavía no han sido publicadas.</p>
+            )}
+          </section>
+          <section
+            id="panel-garantia"
+            role="tabpanel"
+            aria-labelledby="tab-garantia"
+            data-tab-panel="garantia"
+            hidden
+          >
+            <h2>Información de garantía</h2>
+            <p>
+              Consulta con Struch las condiciones de garantía de este producto
+              antes de comprar.
+            </p>
+            <a href="/contacto#garantia" class="text-link">
+              Consultar condiciones ↗
+            </a>
+          </section>
+        </section>
+      </>
+    ) : (
+      <div class="notice">
+        <h1>Producto no disponible</h1>
+        <p>{error}</p>
+        <a href="/productos" class="button">
+          Volver al catálogo
+          <Icono nombre="flecha" />
+        </a>
+      </div>
+    )}
+  </div>
+</Layout>

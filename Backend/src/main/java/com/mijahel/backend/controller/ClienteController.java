@@ -41,6 +41,7 @@ public class ClienteController {
     public Cliente actualizar(@PathVariable UUID id, @jakarta.validation.Valid @RequestBody Cliente datos,org.springframework.security.core.Authentication a) {
         Cliente cliente = clienteRepository.bloquear(id)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        if(!java.util.Objects.equals(cliente.getNombre(),datos.getNombre())){cliente.setNombres(null);cliente.setApellidos(null);}
         cliente.setNombre(datos.getNombre());
         cliente.setDireccion(datos.getDireccion());
         cliente.setTelefono(datos.getTelefono());

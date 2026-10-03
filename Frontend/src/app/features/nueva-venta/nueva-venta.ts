@@ -13,8 +13,8 @@ export class NuevaVenta {
  agregar(p:Producto){if(this.enviando())return;const actual=this.carrito().find(l=>l.producto.id===p.id);this.cantidad(p,(actual?.cantidad||0)+1);}
  cantidad(p:Producto,n:number){if(this.enviando())return;if(!Number.isInteger(n)||n<1||n>p.stock){this.error.set('Cantidad inválida o superior al stock disponible');return;}this.error.set('');this.carrito.update(ls=>ls.some(l=>l.producto.id===p.id)?ls.map(l=>l.producto.id===p.id?{...l,cantidad:n}:l):[...ls,{producto:p,cantidad:n}]);}
  quitar(id:string){if(!this.enviando())this.carrito.update(ls=>ls.filter(l=>l.producto.id!==id));}
- finalizar(){if(this.enviando()||!this.clienteId||!this.carrito().length)return;this.enviando.set(true);this.error.set('');
- this.api.vender({clave:this.clave,clienteId:this.clienteId,lineas:this.carrito().map(l=>({productoId:l.producto.id,cantidad:l.cantidad}))}).subscribe({
+ finalizar(){if(this.enviando()||!this.carrito().length)return;this.enviando.set(true);this.error.set('');
+ this.api.vender({clave:this.clave,clienteId:this.clienteId||null,lineas:this.carrito().map(l=>({productoId:l.producto.id,cantidad:l.cantidad}))}).subscribe({
  next:d=>{this.resultado.set(d.venta);this.carrito.set([]);this.clave=crypto.randomUUID();this.enviando.set(false);this.cargar();},
  error:e=>{this.error.set(e.error?.error||'No se pudo confirmar la venta. Puedes reintentar sin duplicarla.');this.enviando.set(false);this.cargar();}
  });}

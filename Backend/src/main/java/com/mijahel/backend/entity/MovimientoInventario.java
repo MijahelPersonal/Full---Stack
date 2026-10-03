@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="movimientos_inventario")
 public class MovimientoInventario {
+ private UUID pedidoId;public UUID getPedidoId(){return pedidoId;}public void setPedidoId(UUID v){pedidoId=v;}
  @Id @GeneratedValue(strategy=GenerationType.UUID) private UUID id;
  public UUID getId(){return id;}
 

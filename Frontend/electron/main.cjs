@@ -88,6 +88,11 @@ app.whenReady().then(async () => {
           const source=require('node:fs').readFileSync(path.join(__dirname,'media-smoke.cjs'),'utf8');
           console.log('ELECTRON_MEDIA',JSON.stringify(await window.webContents.executeJavaScript(source)));
         }
+        if(process.env.GESTION_TEST_PEDIDOS === '1'){
+          if(!credentials || parsedApi.port!=='8081')throw new Error('La prueba de pedidos requiere el backend aislado en 8081');
+          const source=require('node:fs').readFileSync(path.join(__dirname,'pedidos-smoke.cjs'),'utf8');
+          console.log('ELECTRON_PEDIDOS',JSON.stringify(await window.webContents.executeJavaScript(source)));
+        }
         if(process.env.GESTION_TEST_CAPTURE_DIR){
           const fs=require('node:fs/promises');
           if(credentials && process.env.GESTION_TEST_SALE!=='1'){

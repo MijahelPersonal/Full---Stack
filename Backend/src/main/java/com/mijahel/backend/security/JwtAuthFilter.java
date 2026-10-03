@@ -26,6 +26,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
+    @Override protected boolean shouldNotFilter(HttpServletRequest request){return request.getServletPath().startsWith("/api/tienda/");}
+
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,

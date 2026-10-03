@@ -1,0 +1,392 @@
+/* Refinamiento sobre el diseño STRUCH: sin cambiar geometría ni orden de secciones. */
+.search-shell {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: #fff;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.central-search:focus-within .search-shell {
+  border-color: #ff6500;
+  box-shadow: 0 0 0 3px #ff65001a;
+}
+.central-search input,
+.central-search input:focus,
+.central-search input:focus-visible {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+}
+.search-shell > button {
+  flex-shrink: 0;
+}
+.search-shell > button:focus-visible {
+  outline: 2px solid #050505;
+  outline-offset: -5px;
+}
+.search-results {
+  animation: search-enter 0.2s ease both;
+}
+@keyframes search-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-header > * {
+  translate: 0 0;
+  transition: translate 0.25s;
+}
+.is-scrolled .main-header > * {
+  translate: 0 -3px;
+}
+.brand {
+  transition: transform 0.2s;
+}
+.brand:hover {
+  transform: translateY(-1px);
+}
+.brand span {
+  transition: text-shadow 0.2s;
+}
+.brand:hover span {
+  text-shadow: 0 0 10px #ff65004d;
+}
+.button {
+  transition:
+    background 0.18s,
+    transform 0.18s,
+    border-color 0.18s,
+    box-shadow 0.18s;
+}
+.button:hover {
+  box-shadow: 0 0 20px #ff650026;
+}
+.button:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+.magnetic-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: inherit;
+  pointer-events: none;
+}
+.is-magnetic .magnetic-content {
+  will-change: transform;
+}
+.favorite-button:hover {
+  transform: scale(1.1);
+}
+
+.hero-slider {
+  perspective: 1100px;
+  touch-action: pan-y;
+}
+.hero-media {
+  position: absolute;
+  inset: -12px;
+  transform: translate3d(
+      var(--hero-x, 0px),
+      calc(var(--hero-y, 0px) + var(--hero-scroll, 0px)),
+      0
+    )
+    rotateX(var(--hero-rx, 0deg)) rotateY(var(--hero-ry, 0deg));
+  pointer-events: none;
+}
+.hero-slide:after {
+  transform: translate3d(var(--hero-bg-x, 0px), var(--hero-bg-y, 0px), 0);
+}
+.hero-photo {
+  transform: scale(1.015);
+  transition: transform 0.65s ease;
+}
+.hero-slide.is-active .hero-photo {
+  animation: photo-enter 0.65s ease both;
+}
+.hero-slide.is-active .hero-content h1,
+.hero-slide.is-active .hero-content h2 {
+  animation: title-enter 0.6s ease both;
+}
+.hero-slide.is-active .hero-content > p:not(.eyebrow) {
+  animation: description-enter 0.55s 0.06s ease both;
+}
+.hero-slide.is-active .hero-buttons {
+  animation: buttons-enter 0.5s 0.12s ease both;
+}
+@keyframes photo-enter {
+  from {
+    transform: scale(1.025);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes title-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes description-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes buttons-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.slider-arrows button {
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+.slider-arrows button:hover {
+  background: #ff650018;
+  transform: translateX(2px);
+}
+.mega-menu[open] .mega-columns > div {
+  animation: mega-column 0.23s ease both;
+}
+.mega-menu[open] .mega-columns > div:nth-child(2) {
+  animation-delay: 25ms;
+}
+.mega-menu[open] .mega-columns > div:nth-child(3) {
+  animation-delay: 50ms;
+}
+.mega-menu[open] .mega-columns > div:nth-child(4) {
+  animation-delay: 75ms;
+}
+@keyframes mega-column {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mega-columns a {
+  position: relative;
+  transition:
+    color 0.2s,
+    transform 0.2s;
+}
+.mega-columns a:before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 2px;
+  left: -8px;
+  top: 50%;
+  background: #ff6500;
+  transform: translateY(-50%) scaleY(0);
+  transition: transform 0.2s;
+}
+.mega-columns a:hover,
+.mega-columns a:focus-visible {
+  transform: translateX(4px);
+  color: #ff6500;
+}
+.mega-columns a:hover:before,
+.mega-columns a:focus-visible:before {
+  transform: translateY(-50%) scaleY(1);
+}
+.quick-categories a {
+  position: relative;
+}
+.quick-categories a:after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  left: 18%;
+  right: 18%;
+  bottom: 0;
+  background: #ff6500;
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.quick-categories .icon {
+  transition:
+    transform 0.2s,
+    color 0.2s;
+}
+.quick-categories a:hover .icon {
+  transform: translateY(-4px);
+}
+.quick-categories a:hover:after {
+  transform: scaleX(1);
+}
+.product-card:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    #ff65001a,
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 1;
+}
+.product-card.is-tilting:after {
+  opacity: 1;
+}
+.product-card.is-tilting {
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  will-change: transform;
+}
+.pc-parts > span {
+  border: 1px solid transparent;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+.pc-parts > span:hover {
+  transform: translateY(-4px) rotate(-1deg);
+  border-color: #ff650050;
+  background: #171717;
+}
+.pc-parts > span:nth-child(even):hover {
+  transform: translateY(-3px) rotate(1deg);
+}
+.builder-steps > a {
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.builder-steps > a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px #ff65000a;
+}
+.reveal-pending {
+  opacity: 0;
+}
+.reveal-enter {
+  animation: section-enter 0.5s ease both;
+}
+.card-reveal {
+  animation: card-enter 0.45s var(--reveal-delay, 0ms) ease both;
+}
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Entrada corta: no intercepta navegación ni retiene snapshots del documento. */
+main {
+  animation: page-in 0.25s ease both;
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .product-card:hover {
+    transform: none;
+  }
+  .product-card:after {
+    display: none;
+  }
+  .product-card:hover .product-image img,
+  .magnetic-content,
+  .hero-media {
+    transform: none !important;
+  }
+}
+@media (max-width: 760px) {
+  .is-scrolled .main-header > * {
+    translate: 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-media,
+  .hero-slide:after,
+  .magnetic-content,
+  .quick-categories a:hover .icon,
+  .pc-parts > span:hover,
+  .builder-steps > a:hover,
+  .brand:hover,
+  .slider-arrows button:hover {
+    transform: none !important;
+  }
+  .reveal-pending,
+  .reveal-enter,
+  .card-reveal {
+    opacity: 1;
+  }
+  .is-scrolled .main-header > * {
+    translate: 0 0;
+  }
+  .is-scrolled .nav-bar {
+    transform: none;
+  }
+  .hero-slide:not(.is-active) {
+    visibility: hidden;
+  }
+  .hero-slide.is-active .hero-photo {
+    transform: none;
+  }
+  .product-card:after {
+    display: none;
+  }
+  main {
+    animation: none !important;
+  }
+}

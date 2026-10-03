@@ -6,6 +6,7 @@ export const routes: Routes = [
  {path:'login',component:Login},
  {path:'',component:Layout,canActivate:[authGuard],children:[
   {path:'inicio',loadComponent:()=>import('./features/inicio/inicio').then(m=>m.Inicio)},
+  {path:'pedidos-web',loadComponent:()=>import('./features/pedidos-web/pedidos-web').then(m=>m.PedidosWeb)},
   {path:'nueva-venta',loadComponent:()=>import('./features/nueva-venta/nueva-venta').then(m=>m.NuevaVenta)},
   {path:'productos',loadComponent:()=>import('./features/productos/productos').then(m=>m.Productos)},
   {path:'inventario',loadComponent:()=>import('./features/inventario/inventario').then(m=>m.Inventario)},

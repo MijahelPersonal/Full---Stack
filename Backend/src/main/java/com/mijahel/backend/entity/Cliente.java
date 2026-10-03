@@ -15,6 +15,12 @@ public class Cliente {
     @jakarta.validation.constraints.NotBlank
     @jakarta.validation.constraints.Size(max=160)
     private String nombre;
+    private String nombres;
+    private String apellidos;
+    public String getNombres(){return nombres;}
+    public void setNombres(String v){nombres=v;}
+    public String getApellidos(){return apellidos;}
+    public void setApellidos(String v){apellidos=v;}
     private String direccion;
     private String telefono;
     private String documento;

@@ -1,0 +1,242 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumb from "./Breadcrumb.astro";
+import Tarjeta from "./Tarjeta.astro";
+import Icono from "./Icono.astro";
+import type { prepararCatalogo } from "../lib/tienda";
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  oferta?: boolean;
+  categoria?: string;
+  resultado: Awaited<ReturnType<typeof prepararCatalogo>>;
+  novedades?: boolean;
+}
+const {
+  titulo = "Productos",
+  descripcion = "Explora el hardware para tu próximo equipo.",
+  oferta = false,
+  categoria,
+  resultado,
+  novedades = false,
+} = Astro.props;
+const query = new URLSearchParams(Astro.url.searchParams);
+if (oferta) query.set("oferta", "true");
+if (categoria) query.set("categoria", categoria);
+if (novedades) query.set("orden", "recientes");
+const { estado, pagina, error } = resultado;
+const value = (k: string) => query.get(k) || "";
+const buscar = value("search") || value("q");
+const hrefPagina = (n: number) => {
+  const q = new URLSearchParams(query);
+  q.set("pagina", String(n));
+  return Astro.url.pathname + "?" + q;
+};
+---
+
+<Layout title={titulo} estado={estado || null}>
+  <div class="container catalog-page">
+    <Breadcrumb
+      titulo={titulo}
+      categoria={
+        categoria ? { nombre: "Categorías", href: "/categorias" } : undefined
+      }
+    />
+    <div class:list={["catalog-intro", { "offers-intro": oferta }]}>
+      <div>
+        <p class="eyebrow">
+          {oferta
+            ? "OFERTAS STRUCH"
+            : novedades
+              ? "LO NUEVO EN STRUCH"
+              : "ENCUENTRA TU HARDWARE"}
+        </p>
+        <h1>{titulo}</h1>
+        <p>{descripcion}</p>
+      </div>
+      {oferta && <span class="large-offer-tag">PRECIOS ESPECIALES</span>}
+    </div>
+    <div class="catalog-layout">
+      <aside>
+        <details class="filter-panel" open data-filter-panel>
+          <summary>
+            <Icono nombre="filtro" />
+            Filtros
+            <Icono nombre="chevron" />
+          </summary>
+          <form action={Astro.url.pathname} id="catalog-filters">
+            <div class="filter-title">
+              <strong>Refina tu búsqueda</strong>
+              <a href={Astro.url.pathname}>Limpiar</a>
+            </div>
+            <label>
+              Buscar
+              <input
+                name="search"
+                value={buscar}
+                placeholder="Producto o marca"
+                maxlength="120"
+              />
+            </label>
+            {categoria ? (
+              <input type="hidden" name="categoria" value={categoria} />
+            ) : (
+              <label>
+                Categoría
+                <select name="categoria">
+                  <option value="">Todas las categorías</option>
+                  {estado?.categorias.map((c) => (
+                    <option value={c} selected={value("categoria") === c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
+            <label>
+              Marca
+              <select name="marca">
+                <option value="">Todas las marcas</option>
+                {estado?.marcas.map((m) => (
+                  <option value={m} selected={value("marca") === m}>
+                    {m}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <fieldset>
+              <legend>Precio en soles</legend>
+              <div class="price-inputs">
+                <input
+                  name="min"
+                  type="number"
+                  min="0"
+                  step=".01"
+                  value={value("min")}
+                  placeholder="Desde"
+                  aria-label="Precio mínimo"
+                />
+                <span>—</span>
+                <input
+                  name="max"
+                  type="number"
+                  min="0"
+                  step=".01"
+                  value={value("max")}
+                  placeholder="Hasta"
+                  aria-label="Precio máximo"
+                />
+              </div>
+            </fieldset>
+            <label>
+              Disponibilidad
+              <select name="disponibilidad">
+                <option value="">Todos los productos</option>
+                <option
+                  value="con-stock"
+                  selected={value("disponibilidad") === "con-stock"}
+                >
+                  Con stock
+                </option>
+                <option
+                  value="sin-stock"
+                  selected={value("disponibilidad") === "sin-stock"}
+                >
+                  Sin stock
+                </option>
+              </select>
+            </label>
+            {oferta ? (
+              <input type="hidden" name="oferta" value="true" />
+            ) : (
+              <label class="check-label">
+                <input
+                  name="oferta"
+                  type="checkbox"
+                  value="true"
+                  checked={value("oferta") === "true"}
+                />
+                Solo ofertas
+              </label>
+            )}
+            <button type="submit" class="button">
+              Aplicar filtros
+              <Icono nombre="flecha" />
+            </button>
+          </form>
+        </details>
+        <div class="filter-help">
+          <Icono nombre="soporte" />
+          <h3>¿No sabes cuál elegir?</h3>
+          <p>Te ayudamos a encontrar el hardware adecuado.</p>
+          <a href="/contacto">Contactar con Struch ↗</a>
+        </div>
+      </aside>
+      <section class="catalog-results" aria-label="Productos">
+        <div class="results-toolbar">
+          <p>
+            <strong>{pagina?.total ?? "—"}</strong> productos
+          </p>
+          <label>
+            Ordenar por
+            <select name="orden" form="catalog-filters" data-sort>
+              {[
+                ["recientes", "Más recientes"],
+                ["precio-menor", "Menor precio"],
+                ["precio-mayor", "Mayor precio"],
+                ["destacados", "Destacados"],
+              ].map(([v, t]) => (
+                <option
+                  value={v}
+                  selected={(value("orden") || "recientes") === v}
+                >
+                  {t}
+                </option>
+              ))}
+              <option disabled>Más vendidos (próximamente)</option>
+            </select>
+          </label>
+        </div>
+        {error ? (
+          <div class="notice" role="alert">
+            <h2>Catálogo no disponible</h2>
+            <p>{error}</p>
+            <a class="button" href={Astro.url.pathname}>
+              Reintentar
+            </a>
+          </div>
+        ) : pagina?.items.length ? (
+          <>
+            <div class="product-grid catalog-grid">
+              {pagina.items.map((p) => (
+                <Tarjeta producto={p} />
+              ))}
+            </div>
+            {pagina.paginas > 1 && (
+              <nav class="pagination" aria-label="Páginas del catálogo">
+                {pagina.pagina > 0 && (
+                  <a href={hrefPagina(pagina.pagina - 1)}>← Anterior</a>
+                )}
+                <span>
+                  Página {pagina.pagina + 1} de {pagina.paginas}
+                </span>
+                {pagina.pagina + 1 < pagina.paginas && (
+                  <a href={hrefPagina(pagina.pagina + 1)}>Siguiente →</a>
+                )}
+              </nav>
+            )}
+          </>
+        ) : (
+          <div class="empty-state">
+            <Icono nombre="buscar" />
+            <h2>No encontramos productos disponibles.</h2>
+            <p>Prueba otra búsqueda o ajusta los filtros.</p>
+            <a class="button button-outline" href="/productos">
+              Ver todos los productos
+            </a>
+          </div>
+        )}
+      </section>
+    </div>
+  </div>
+</Layout>

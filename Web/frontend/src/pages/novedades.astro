@@ -1,0 +1,15 @@
+---
+import Catalogo from "../components/Catalogo.astro";
+import { prepararCatalogo } from "../lib/tienda";
+const query = new URLSearchParams(Astro.url.searchParams);
+query.set("orden", "recientes");
+const resultado = await prepararCatalogo(query);
+Astro.response.status = resultado.status;
+---
+
+<Catalogo
+  resultado={resultado}
+  titulo="Nuevos ingresos"
+  descripcion="Lo más reciente de nuestro catálogo, listo para tu siguiente proyecto."
+  novedades
+/>

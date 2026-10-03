@@ -1,0 +1,142 @@
+---
+import { Image } from "astro:assets";
+import gpu from "../assets/struch-hero.png";
+import cpu from "../assets/struch-cpu.png";
+import laptop from "../assets/struch-laptop.png";
+import Icono from "./Icono.astro";
+interface Props {
+  hayOfertas?: boolean;
+}
+const { hayOfertas = false } = Astro.props;
+const slides = [
+  {
+    tag: "EL HARDWARE HACE LA DIFERENCIA",
+    titulo: "POTENCIA PARA",
+    acento: "TU SIGUIENTE NIVEL.",
+    texto: "Hardware seleccionado para construir, trabajar y jugar.",
+    imagen: gpu,
+    url: "/productos",
+    boton: "Ver productos",
+  },
+  {
+    tag: "CADA NÚCLEO CUENTA",
+    titulo: "MÁS VELOCIDAD.",
+    acento: "MÁS POSIBILIDADES.",
+    texto: "Encuentra el procesador que mueve tus ideas.",
+    imagen: cpu,
+    url: "/productos?search=procesador",
+    boton: "Explorar procesadores",
+  },
+  {
+    tag: "TU SETUP, A TU MANERA",
+    titulo: "CREA. TRABAJA.",
+    acento: "JUEGA SIN LÍMITES.",
+    texto: "Equipos y periféricos para llevar tu experiencia más lejos.",
+    imagen: laptop,
+    url: "/productos?search=laptop",
+    boton: "Explorar equipos",
+  },
+  {
+    tag: "OFERTAS STRUCH",
+    titulo: "EL SIGUIENTE PASO.",
+    acento: "AL MEJOR PRECIO.",
+    texto: "Explora los productos con precio reducido de nuestro catálogo.",
+    imagen: gpu,
+    url: "/ofertas",
+    boton: "Ver ofertas",
+  },
+].filter((_, i) => i !== 3 || hayOfertas);
+---
+
+<section
+  class="hero-slider"
+  data-slider
+  aria-label="Promociones Struch"
+  aria-roledescription="carrusel"
+>
+  <div class="hero-slides">
+    {slides.map((s, i) => (
+      <article
+        class:list={["hero-slide", { "is-active": i === 0 }]}
+        data-slide
+        aria-hidden={i !== 0}
+        inert={i !== 0}
+      >
+        <div class="hero-media">
+          <Image
+            src={s.imagen}
+            widths={[640, 1024, 1600, 2172]}
+            sizes="100vw"
+            format="webp"
+            quality={82}
+            alt=""
+            loading={i === 0 ? "eager" : "lazy"}
+            fetchpriority={i === 0 ? "high" : "auto"}
+            class="hero-photo"
+          />
+        </div>
+        <div class="container hero-content">
+          <p class="eyebrow">{s.tag}</p>
+          {i === 0 ? (
+            <h1>
+              {s.titulo}
+              <br />
+              <span>{s.acento}</span>
+            </h1>
+          ) : (
+            <h2>
+              {s.titulo}
+              <br />
+              <span>{s.acento}</span>
+            </h2>
+          )}
+          <p>{s.texto}</p>
+          <div class="hero-buttons">
+            <a class="button" href={s.url}>
+              {s.boton}
+              <Icono nombre="flecha" />
+            </a>
+            <a
+              class="button button-outline"
+              href={i === 3 ? "/productos" : "/ofertas"}
+            >
+              {i === 3 ? "Ver productos" : "Ver ofertas"}
+            </a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+  <div class="container slider-controls">
+    <div class="slide-dots">
+      {slides.map((s, i) => (
+        <button
+          type="button"
+          data-slide-to={i}
+          aria-label={`Banner ${i + 1}: ${s.tag}`}
+          aria-pressed={i === 0}
+          class:list={[{ active: i === 0 }]}
+        ></button>
+      ))}
+    </div>
+    <span class="slide-counter">
+      <b data-slide-number>01</b> / {String(slides.length).padStart(2, "0")}
+    </span>
+    <div class="slider-arrows">
+      <button type="button" data-slide-prev aria-label="Banner anterior">
+        <Icono nombre="flecha" clase="rotate" />
+      </button>
+      <button type="button" data-slide-next aria-label="Banner siguiente">
+        <Icono nombre="flecha" />
+      </button>
+      <button
+        type="button"
+        data-slide-pause
+        aria-label="Pausar banners"
+        aria-pressed="false"
+      >
+        <Icono nombre="pausa" />
+      </button>
+    </div>
+  </div>
+</section>

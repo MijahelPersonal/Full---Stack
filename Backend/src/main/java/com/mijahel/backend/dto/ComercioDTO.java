@@ -10,11 +10,18 @@ public final class ComercioDTO {
    @NotBlank @Size(max=80) String categoria, @NotBlank @Size(max=80) String marca,
    @NotNull @DecimalMin("0.00") @Digits(integer=12,fraction=2) BigDecimal precioCompra,
    @NotNull @DecimalMin("0.01") @Digits(integer=12,fraction=2) BigDecimal precioVenta,
-   @Min(0) int stockInicial, @Min(0) int stockMinimo, boolean activo) {}
+   @Min(0) int stockInicial, @Min(0) int stockMinimo, boolean activo, @Valid ProductoWebRequest web) {
+   public ProductoRequest(String sku,String nombre,String categoria,String marca,BigDecimal precioCompra,BigDecimal precioVenta,int stockInicial,int stockMinimo,boolean activo){
+     this(sku,nombre,categoria,marca,precioCompra,precioVenta,stockInicial,stockMinimo,activo,null);
+   }
+ }
+ public record ProductoWebRequest(@NotNull @Size(max=6000) String descripcion,
+   @NotNull @Size(max=40) Map<@NotBlank @Size(max=80) String,@NotBlank @Size(max=300) String> especificaciones,
+   boolean destacado, @DecimalMin("0.01") @Digits(integer=12,fraction=2) BigDecimal precioAnterior) {}
  public record MovimientoRequest(@NotNull UUID productoId, @NotBlank String tipo,
    @Min(1) int cantidad, @NotBlank @Size(max=250) String motivo) {}
  public record LineaRequest(@NotNull UUID productoId, @Min(1) int cantidad) {}
- public record VentaRequest(@NotNull UUID clave, @NotNull UUID clienteId,
+ public record VentaRequest(@NotNull UUID clave, UUID clienteId,
    @NotEmpty @Size(max=100) List<@Valid LineaRequest> lineas) {}
  public record VentaDetalle(Venta venta, List<DetalleVenta> detalles) {}
  public record Inicio(long ventasHoy, BigDecimal totalHoy, long productos, long stockBajo,

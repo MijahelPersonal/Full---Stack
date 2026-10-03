@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="ventas")
 public class Venta {
+ private String origen="POS";public String getOrigen(){return origen;}public void setOrigen(String v){origen=v;}
  @Id @GeneratedValue(strategy=GenerationType.UUID) private UUID id;
  public UUID getId(){return id;}
  @Column(nullable=false, unique=true)

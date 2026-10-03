@@ -26,6 +26,8 @@ public class SecurityConfig {
 
     @org.springframework.beans.factory.annotation.Value("${app.web.allowed-origins:http://localhost:4321,http://127.0.0.1:4321}")
     private String webOrigins;
+    @org.springframework.beans.factory.annotation.Value("${app.cors.allowed-origins:http://localhost:4200,http://localhost:4321,app://gestion}")
+    private String clientOrigins;
 
     private final JwtAuthFilter jwtAuthFilter;
     private final CustomUserDetailsService userDetailsService;
@@ -55,6 +57,7 @@ public class SecurityConfig {
     @Bean @org.springframework.core.annotation.Order(1)
     public SecurityFilterChain clientesChain(HttpSecurity http,ClienteJwtService jwt,com.mijahel.backend.service.CuentaClienteService cuentas) throws Exception {
         return http.securityMatcher("/api/tienda/**").csrf(c->c.disable())
+          .cors(c->c.configurationSource(corsConfigurationSource()))
           .sessionManagement(c->c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
           .authorizeHttpRequests(c->c.requestMatchers(org.springframework.http.HttpMethod.POST,"/api/tienda/auth/login","/api/tienda/auth/registro").permitAll().anyRequest().hasRole("CLIENTE_WEB"))
           .exceptionHandling(c->c.authenticationEntryPoint((r,s,e)->s.sendError(401)))
@@ -68,6 +71,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.GET,"/api/health").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET,"/api/public/productos","/api/public/productos/*","/api/public/categorias","/api/public/marcas").permitAll()
                         .requestMatchers(org.springframework.http.HttpMethod.GET,"/api/productos/imagenes/*").permitAll()
                         .anyRequest().authenticated()
@@ -80,17 +84,24 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200", "app://gestion"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
+        config.setAllowedOrigins(origins(clientOrigins));
+        config.setAllowedMethods(List.of("GET", "HEAD", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration publico=new CorsConfiguration();
-        publico.setAllowedOrigins(java.util.Arrays.stream(webOrigins.split(",")).map(String::trim).filter(s->!s.isEmpty()).toList());
+        publico.setAllowedOrigins(origins(webOrigins + "," + clientOrigins));
         publico.setAllowedMethods(List.of("GET","HEAD"));
         publico.setAllowedHeaders(List.of("Accept","Content-Type"));
         source.registerCorsConfiguration("/api/public/**",publico);
         source.registerCorsConfiguration("/**", config);
         return source;
+    }
+    private List<String> origins(String value) {
+        return java.util.Arrays.stream(value.split(",")).map(String::trim).filter(s->!s.isEmpty()).map(s->{
+            if(s.contains("*") || !(s.startsWith("https://") || s.equals("app://gestion") || s.equals("http://localhost:4200") || s.equals("http://localhost:4321") || s.equals("http://127.0.0.1:4321")))
+                throw new IllegalArgumentException("Origen CORS no permitido");
+            return s;
+        }).distinct().toList();
     }
 }

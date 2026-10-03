@@ -12,7 +12,9 @@
     "build:desktop": "ng build --configuration production,desktop",
     "electron:start": "electron electron/main.cjs",
     "electron:smoke": "electron electron/main.cjs --smoke",
-    "desktop:package": "npm run build:desktop && electron-builder"
+    "desktop:prepare": "node electron/prepare-production.cjs",
+    "desktop:verify": "npm run build:desktop && electron-builder --dir",
+    "desktop:package": "npm run desktop:prepare && npm run build:desktop && electron-builder"
   },
   "private": true,
   "packageManager": "npm@11.16.0",

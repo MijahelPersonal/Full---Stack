@@ -24,12 +24,19 @@ export class ApiError extends Error {
     super("El catálogo no está disponible");
   }
 }
-export const origen = () =>
-  (
+export const origen = () => {
+  const value = (
     process.env.API_URL ||
     import.meta.env?.API_URL ||
     "http://localhost:8080"
   ).replace(/\/$/, "");
+  const url = new URL(value);
+  const production = process.env.DEPLOY_TARGET === 'vercel' || process.env.VERCEL === '1';
+  if (production && (!process.env.API_URL || url.protocol !== 'https:' || ['localhost','127.0.0.1','[::1]'].includes(url.hostname)))
+    throw new Error('API_URL HTTPS pública requerida en producción');
+  if(url.username || url.password || url.search || url.hash || url.pathname !== '/') throw new Error('API_URL debe ser un origen sin credenciales ni ruta');
+  return value;
+};
 export async function api<T>(ruta: string): Promise<T> {
   const r = await fetch(`${origen()}/api/public/${ruta}`, {
     cache: "no-store",

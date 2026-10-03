@@ -1,11 +1,15 @@
 appId: com.mijahel.gestion
-productName: Gestion
+productName: SistemaGestion
+artifactName: SistemaGestion-Setup.${ext}
+beforePack: electron/before-pack.cjs
 directories:
   output: release
 files:
   - electron/main.cjs
   - electron/preload.cjs
   - electron/protocol.cjs
+  - electron/config.cjs
+  - electron/config.production.json
   - dist/desktop/browser/**/*
   - package.json
 win:

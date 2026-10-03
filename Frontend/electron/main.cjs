@@ -3,7 +3,7 @@ const path = require('node:path');
 const { registerScheme, serveAngular } = require('./protocol.cjs');
 
 registerScheme();
-const development = process.argv.includes('--dev');
+const development = !app.isPackaged && process.argv.includes('--dev');
 const smoke = process.argv.includes('--smoke');
 if(smoke){
   const smokeData=path.join(require('node:os').tmpdir(),'gestion-mvp-smoke-'+process.pid);
@@ -11,12 +11,12 @@ if(smoke){
   app.setPath('userData',smokeData);
 }
 const origin = development ? 'http://localhost:4200' : 'app://gestion';
-const apiUrl = process.env.GESTION_API_URL || 'http://localhost:8080/api';
+const apiUrl = require('./config.cjs').apiConfig({packaged:app.isPackaged,development,smoke});
 const parsedApi = new URL(apiUrl);
 if (!['http:', 'https:'].includes(parsedApi.protocol)) throw new Error('Invalid API URL');
 
 app.whenReady().then(async () => {
-  serveAngular(path.join(__dirname, '../dist/desktop/browser'));
+  serveAngular(path.join(__dirname, '../dist/desktop/browser'),apiUrl);
   ipcMain.handle('gestion:config', (event) => {
     if (!event.senderFrame || new URL(event.senderFrame.url).host !== new URL(origin).host ||
         new URL(event.senderFrame.url).protocol !== new URL(origin).protocol) {

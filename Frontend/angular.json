@@ -66,7 +66,16 @@
                 "styles": {
                   "inlineCritical": false
                 }
-              }
+              },
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public",
+                  "ignore": [
+                    "config.json"
+                  ]
+                }
+              ]
             },
             "desktop-development": {
               "optimization": false,

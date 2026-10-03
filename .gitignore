@@ -22,3 +22,7 @@ backups/
 .env.*
 !.env.example
 Web/tools/demo/.state/
+.vercel/
+__pycache__/
+*.pyc
+Frontend/electron/config.production.json

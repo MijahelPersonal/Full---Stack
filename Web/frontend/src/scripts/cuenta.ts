@@ -1,0 +1,6 @@
+const controller=new AbortController();
+async function enviar(accion:string,datos:unknown){const r=await fetch(`/api/cuenta/${accion}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(datos),signal:AbortSignal.any([controller.signal,AbortSignal.timeout(12000)])});const d=await r.json();if(!r.ok)throw new Error(d.error||'No se pudo completar la solicitud');location.assign(d.destino);}
+const formulario=document.querySelector<HTMLFormElement>('[data-account-form]');
+formulario?.addEventListener('submit',async e=>{e.preventDefault();const boton=formulario.querySelector<HTMLButtonElement>('button[type=submit]')!;if(boton.disabled)return;boton.disabled=true;const error=formulario.querySelector<HTMLElement>('[data-account-error]')!;error.textContent='';try{await enviar(formulario.dataset.accion!,Object.fromEntries(new FormData(formulario)));}catch(e){error.textContent=e instanceof Error?e.message:'No se pudo conectar';boton.disabled=false;}},{signal:controller.signal});
+document.querySelector<HTMLButtonElement>('[data-logout]')?.addEventListener('click',async e=>{const b=e.currentTarget as HTMLButtonElement;b.disabled=true;try{await enviar('logout',{});}catch{b.disabled=false;}},{signal:controller.signal});
+window.addEventListener('pagehide',()=>controller.abort(),{once:true});

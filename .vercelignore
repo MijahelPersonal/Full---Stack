@@ -1,0 +1,16 @@
+/Backend/
+/Frontend/
+/backups/
+/tools/
+/Web/tools/
+/Web/product-images-library/
+/Web/demo-product-images/
+**/node_modules/
+**/dist/
+**/.astro/
+**/.angular/
+**/.env
+**/.env.*
+**/*.log
+**/__pycache__/
+**/release/

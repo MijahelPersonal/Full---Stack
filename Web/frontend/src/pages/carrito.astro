@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Carrito from "../components/Carrito.astro";
+---
+
+<Layout title="Mi carrito">
+  <div class="container page-shell">
+    <Breadcrumb titulo="Carrito" />
+    <div class="page-title compact">
+      <p class="eyebrow">TU SELECCIÓN</p>
+      <h1>Mi carrito</h1>
+      <p>Revisa tus productos antes de dar el siguiente paso.</p>
+    </div>
+    <Carrito />
+    <noscript>
+      <p class="notice">
+        Activa JavaScript para consultar y editar el carrito local.
+      </p>
+    </noscript>
+  </div>
+</Layout>

@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Icono from "../components/Icono.astro";
+import { estadoCatalogo, type EstadoCatalogo } from "../lib/tienda";
+let estado: EstadoCatalogo | undefined,
+  error = false;
+try {
+  estado = await estadoCatalogo();
+} catch {
+  error = true;
+  Astro.response.status = 503;
+}
+---
+
+<Layout title="Marcas" estado={estado || null}>
+  <div class="container page-shell">
+    <Breadcrumb titulo="Marcas" />
+    <div class="page-title">
+      <p class="eyebrow">TU HARDWARE, TU ELECCIÓN</p>
+      <h1>Explora por marca.</h1>
+      <p>Las marcas presentes en nuestro catálogo actual.</p>
+    </div>
+    {error ? (
+      <div class="notice">
+        <h2>Catálogo no disponible</h2>
+        <p>No pudimos consultar las marcas.</p>
+        <a class="button" href="/marcas">
+          Reintentar
+        </a>
+      </div>
+    ) : (
+      <div class="brand-grid">
+        {estado?.marcas.length === 0 && (
+          <div class="empty-state">
+            <Icono nombre="box" />
+            <h2>No hay marcas disponibles todavía.</h2>
+            <p>Aparecerán al incorporar productos al catálogo.</p>
+          </div>
+        )}
+        {estado?.marcas.map((m) => (
+          <a href={`/productos?marca=${encodeURIComponent(m)}`}>
+            <strong>{m}</strong>
+            <span>
+              Ver productos
+              <Icono nombre="flecha" />
+            </span>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>

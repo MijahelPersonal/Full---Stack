@@ -1,0 +1,65 @@
+---
+import Imagen from "./Imagen.astro";
+import Icono from "./Icono.astro";
+import { dinero, descuento, type Producto } from "../lib/shared";
+interface Props {
+  producto: Producto;
+}
+const { producto: p } = Astro.props;
+const rebaja = descuento(p);
+const datos = JSON.stringify({
+  ...p,
+  descripcion: undefined,
+  especificaciones: undefined,
+});
+---
+
+<article class="product-card" data-tilt>
+  <div class="card-media">
+    <a href={`/producto/${p.slug}`} aria-label={`Ver ${p.nombre}`}>
+      <Imagen producto={p} />
+    </a>
+    {rebaja > 0 && <span class="offer-badge">−{rebaja}%</span>}
+    <button
+      class="favorite-button"
+      type="button"
+      data-favorite={p.id}
+      aria-label={`Guardar ${p.nombre} en favoritos`}
+      aria-pressed="false"
+    >
+      <Icono nombre="corazon" />
+    </button>
+  </div>
+  <div class="card-body">
+    <p class="product-brand">{p.marca}</p>
+    <h3>
+      <a href={`/producto/${p.slug}`}>{p.nombre}</a>
+    </h3>
+    <p class="product-category">{p.categoria}</p>
+    <div class="card-price">
+      {rebaja > 0 ? (
+        <del>{dinero(p.precioAnterior!)}</del>
+      ) : (
+        <span class="price-label">Precio actual</span>
+      )}
+      <strong>{dinero(p.precio)}</strong>
+    </div>
+    <p class:list={["stock", { "sold-out": p.stock === 0 }]}>
+      <span></span>
+      {p.stock > 0 ? `En stock · ${p.stock} unidades` : "Sin stock"}
+    </p>
+    <button
+      type="button"
+      class="button card-cart"
+      disabled={p.stock === 0}
+      data-add-cart={datos}
+    >
+      <Icono nombre="carrito" />
+      Agregar al carrito
+    </button>
+    <a class="card-detail" href={`/producto/${p.slug}`}>
+      Ver detalle
+      <Icono nombre="flecha" />
+    </a>
+  </div>
+</article>

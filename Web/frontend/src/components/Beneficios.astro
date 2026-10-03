@@ -1,0 +1,21 @@
+---
+import Icono from "./Icono.astro";
+const beneficios = [
+  ["ubicacion", "Recojo en tienda", "Presenta tu código de pedido", "envios"],
+  ["escudo", "Garantía", "Revisa las condiciones", "garantia"],
+  ["check", "Hardware seleccionado", "Compara y elige tu equipo", "ayuda"],
+  ["soporte", "Soporte", "Te ayudamos a elegir", "ayuda"],
+];
+---
+
+<section class="benefits container" aria-label="Información de compra">
+  {beneficios.map(([icono, titulo, texto, anchor]) => (
+    <a href={`/contacto#${anchor}`}>
+      <Icono nombre={icono} />
+      <div>
+        <h3>{titulo}</h3>
+        <p>{texto}</p>
+      </div>
+    </a>
+  ))}
+</section>

@@ -1,0 +1,205 @@
+---
+import Icono from "./Icono.astro";
+import { grupoCategoria, slugCategoria } from "../lib/shared";
+import type { EstadoCatalogo } from "../lib/tienda";
+import { sesion, type Cuenta } from "../lib/cuenta";
+let cuenta: Cuenta | null = null;
+try { cuenta = await sesion(Astro.cookies); } catch {}
+interface Props {
+  estado?: EstadoCatalogo;
+}
+const { estado } = Astro.props;
+const categorias = estado?.categorias || [];
+const path = Astro.url.pathname;
+const enlaces = [
+  ["/productos", "Productos"],
+  ["/marcas", "Marcas"],
+  ["/ofertas", "Ofertas"],
+  ["/arma-tu-pc", "Arma tu PC"],
+  ["/novedades", "Novedades"],
+  ["/contacto", "Contacto"],
+];
+---
+
+<header class="site-header" data-header>
+  <div class="top-bar">
+    <div class="container top-inner">
+      <div>
+        Hola, bienvenido a <strong>Struch</strong>
+        <span class="top-auth">
+          {cuenta ? <a href="/cuenta">Mi cuenta</a> : <><a href="/cuenta">Iniciar sesión</a>
+          <span>/</span>
+          <a href="/cuenta?modo=registro">Registrarse</a></>}
+        </span>
+      </div>
+      <nav aria-label="Información">
+        <a href="/contacto#ubicacion">
+          <Icono nombre="ubicacion" />
+          Ubicación
+        </a>
+        <a href="/cuenta?seccion=pedidos">Rastrea tu pedido</a>
+        <a href="/contacto#ayuda">Soporte</a>
+        <a href="/cuenta">Mi cuenta</a>
+      </nav>
+    </div>
+  </div>
+  <div class="container main-header">
+    <button
+      class="mobile-menu-button icon-button"
+      type="button"
+      aria-label="Abrir menú"
+      data-open-mobile
+    >
+      <Icono nombre="menu" />
+    </button>
+    <a class="brand" href="/" aria-label="STRUCH, inicio">
+      STRUCH<span>.</span>
+    </a>
+    <form
+      action="/productos"
+      class="central-search"
+      role="search"
+      data-search-form
+    >
+      <div class="search-shell">
+        <div class="search-input-wrap">
+          <label class="sr-only" for="site-search">
+            Buscar productos
+          </label>
+          <input
+            id="site-search"
+            name="search"
+            placeholder="¿Qué estás buscando?"
+            autocomplete="off"
+            maxlength="120"
+            value={
+              Astro.url.searchParams.get("search") ||
+              Astro.url.searchParams.get("q") ||
+              ""
+            }
+            aria-controls="search-results"
+            aria-expanded="false"
+            data-search-input
+          />
+        </div>
+        <button type="submit" aria-label="Buscar">
+          <Icono nombre="buscar" />
+        </button>
+      </div>
+      <div
+        class="search-results"
+        id="search-results"
+        hidden
+        data-search-results
+        aria-label="Sugerencias de búsqueda"
+      ></div>
+    </form>
+    <div class="header-actions">
+      <a href="/cuenta" class="header-action" aria-label={cuenta ? "Mi cuenta, mis pedidos" : "Mi cuenta, ingresar"}>
+        <Icono nombre="usuario" />
+        <span>
+          <small>Mi cuenta</small>
+          <strong>{cuenta ? "Mis pedidos" : "Ingresar"}</strong>
+        </span>
+      </a>
+      <a
+        href="/carrito"
+        class="header-action cart-header"
+        aria-label="Mi carrito"
+      >
+        <span class="cart-icon">
+          <Icono nombre="carrito" />
+          <b data-cart-count>0</b>
+        </span>
+        <span>
+          <small>Mi carrito</small>
+          <strong data-cart-label>0 productos · S/ 0.00</strong>
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <div class="container nav-inner">
+      <details class="mega-menu" data-mega>
+        <summary>
+          <Icono nombre="menu" />
+          CATEGORÍAS
+          <Icono nombre="chevron" />
+        </summary>
+        <div class="mega-panel">
+          <div class="mega-heading">
+            <strong>Todo para tu próximo equipo</strong>
+            <a href="/categorias">
+              Ver categorías <Icono nombre="flecha" />
+            </a>
+          </div>
+          <div class="mega-columns">
+            {["Componentes", "Equipos", "Periféricos", "Accesorios"].map(
+              (grupo) => (
+                <div>
+                  <h3>{grupo}</h3>
+                  {categorias
+                    .filter((c) => grupoCategoria(c) === grupo)
+                    .map((c) => (
+                      <a href={`/categorias/${slugCategoria(c)}`}>{c}</a>
+                    ))}
+                </div>
+              ),
+            )}
+          </div>
+        </div>
+      </details>
+      <nav aria-label="Principal">
+        {enlaces.map(([href, texto]) => (
+          <a
+            href={href}
+            class:list={["nav-link", { active: path === href }]}
+            aria-current={path === href ? "page" : undefined}
+          >
+            {texto}
+          </a>
+        ))}
+      </nav>
+      <a class="nav-contact" href="/contacto">
+        <Icono nombre="soporte" />
+        Te ayudamos a elegir
+      </a>
+    </div>
+  </div>
+</header>
+<dialog class="mobile-drawer" data-mobile-menu>
+  <div class="drawer-header">
+    <a class="brand" href="/">
+      STRUCH<span>.</span>
+    </a>
+    <button
+      type="button"
+      class="icon-button"
+      aria-label="Cerrar menú"
+      data-close-mobile
+    >
+      <Icono nombre="cerrar" />
+    </button>
+  </div>
+  <nav aria-label="Navegación móvil">
+    <a href="/">Inicio</a>
+    {enlaces.map(([href, texto]) => (
+      <a href={href}>
+        {texto}
+        <Icono nombre="flecha" />
+      </a>
+    ))}
+    <details>
+      <summary>
+        Categorías
+        <Icono nombre="chevron" />
+      </summary>
+      <a href="/categorias">Todas las categorías</a>
+      {categorias.map((c) => (
+        <a href={`/categorias/${slugCategoria(c)}`}>{c}</a>
+      ))}
+    </details>
+    <a href="/cuenta">Mi cuenta</a>
+    <a href="/carrito">Mi carrito</a>
+  </nav>
+</dialog>

@@ -1,0 +1,62 @@
+---
+interface Props {
+  nombre: string;
+  clase?: string;
+}
+const { nombre, clase = "" } = Astro.props;
+const paths: Record<string, string> = {
+  buscar: "m21 21-5-5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0",
+  usuario:
+    "M20 21v-2a6 6 0 0 0-6-6h-4a6 6 0 0 0-6 6v2M16 5a4 4 0 1 1-8 0 4 4 0 0 1 8 0",
+  carrito: "M2 2h3l3 13h11l3-9H6M10 20h.01M18 20h.01",
+  menu: "M3 6h18M3 12h18M3 18h18",
+  cerrar: "m5 5 14 14M19 5 5 19",
+  flecha: "M4 12h16m-6-6 6 6-6 6",
+  chevron: "m7 10 5 5 5-5",
+  corazon:
+    "M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8",
+  box: "m3 7 9-5 9 5v10l-9 5-9-5V7m0 0 9 5 9-5M12 12v10",
+  cpu: "M7 7h10v10H7zM9 1v6m6-6v6M9 17v6m6-6v6M1 9h6m-6 6h6m10-6h6m-6 6h6",
+  gpu: "M2 6h19v12H2zM5 18v3M9 18v2M6 10h3v4H6zm8-1h4v6h-4z",
+  board: "M4 2h16v20H4zM8 5h6v6H8zM8 15h9m-9 3h9M17 5v6",
+  ram: "M2 6h20v10H2zM5 9h3v4H5zm6 0h3v4h-3zm6 0h3v4h-3zM5 16v3m4-3v3m4-3v3m4-3v3m3-3v3",
+  ssd: "M4 5h16v14H4zM8 9h8v6H8zM20 8h3m-3 4h3m-3 4h3",
+  laptop: "M4 3h16v13H4zM1 20h22l-3-4H4z",
+  monitor: "M2 3h20v14H2zM12 17v4m-5 1h10",
+  keyboard:
+    "M2 6h20v12H2zM5 9h1m2 0h1m2 0h1m2 0h1m2 0h1M5 12h1m2 0h1m2 0h1m2 0h1m2 0h1M7 15h10",
+  mouse: "M6 11a6 6 0 0 1 12 0v6a6 6 0 0 1-12 0v-6M12 5v6M6 11h12",
+  headset: "M3 14v-3a9 9 0 0 1 18 0v3M3 12h4v9H3zm14 0h4v9h-4z",
+  case: "M5 2h14v20H5zM8 6h8M9 11h6v5H9zM8 19h.01",
+  escudo: "m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6l9-4m-4 10 3 3 5-6",
+  envio:
+    "M1 4h13v12H1zM14 9h5l4 4v3h-9M7 19a2 2 0 1 1-4 0 2 2 0 0 1 4 0m14 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0",
+  soporte:
+    "M4 14v-3a8 8 0 0 1 16 0v6M4 12H2v7h4v-7m14 0h2v7h-4v-7m2 7c0 3-4 3-8 3",
+  ubicacion:
+    "M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0M15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0",
+  mail: "M2 4h20v16H2zm0 0 10 9L22 4",
+  telefono: "M5 2h4l2 5-3 2c2 4 3 5 7 7l2-3 5 2v4c0 6-8 3-14-3S-1 2 5 2",
+  filtro: "M3 4h18l-7 8v8l-4-2v-6L3 4",
+  check: "m4 12 5 5L20 6",
+  papelera: "M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7",
+  estrella: "m12 2 3 6 7 1-5 5 1 8-6-4-6 4 1-8-5-5 7-1z",
+  pausa: "M8 4v16M16 4v16",
+  play: "m7 3 14 9-14 9V3",
+  plus: "M12 4v16M4 12h16",
+  minus: "M4 12h16",
+};
+---
+
+<svg
+  class:list={["icon", clase]}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d={paths[nombre] || paths.box} />
+</svg>

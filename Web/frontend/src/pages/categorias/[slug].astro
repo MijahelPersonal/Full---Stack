@@ -1,0 +1,55 @@
+---
+import Catalogo from "../../components/Catalogo.astro";
+import Layout from "../../layouts/Layout.astro";
+import {
+  estadoCatalogo,
+  prepararCatalogo,
+  type EstadoCatalogo,
+} from "../../lib/tienda";
+import { slugCategoria } from "../../lib/shared";
+let estado: EstadoCatalogo | undefined,
+  categoria: string | undefined,
+  error = false;
+try {
+  estado = await estadoCatalogo();
+  categoria = estado.categorias.find(
+    (c) => slugCategoria(c) === Astro.params.slug,
+  );
+  if (!categoria) Astro.response.status = 404;
+} catch {
+  error = true;
+  Astro.response.status = 503;
+}
+const query = new URLSearchParams(Astro.url.searchParams);
+if (categoria) query.set("categoria", categoria);
+const resultado = categoria ? await prepararCatalogo(query, estado) : undefined;
+if (resultado) Astro.response.status = resultado.status;
+---
+
+{categoria && resultado ? (
+  <Catalogo
+    titulo={categoria}
+    categoria={categoria}
+    resultado={resultado}
+    descripcion={`Explora ${categoria.toLowerCase()} y compara las opciones disponibles.`}
+  />
+) : (
+  <Layout
+    title={error ? "Catálogo no disponible" : "Categoría no encontrada"}
+    estado={estado || null}
+  >
+    <div class="container page-shell">
+      <div class="notice">
+        <h1>{error ? "Catálogo no disponible" : "Categoría no encontrada"}</h1>
+        <p>
+          {error
+            ? "No pudimos conectar con el catálogo."
+            : "Esta categoría no está disponible en el catálogo actual."}
+        </p>
+        <a class="button" href="/categorias">
+          Ver categorías
+        </a>
+      </div>
+    </div>
+  </Layout>
+)}

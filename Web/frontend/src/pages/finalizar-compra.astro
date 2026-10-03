@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Carrito from "../components/Carrito.astro";
+import {sesion} from "../lib/cuenta";
+Astro.response.headers.set("Cache-Control","no-store");
+try{if(!await sesion(Astro.cookies))return Astro.redirect("/cuenta?volver=/finalizar-compra");}catch{return Astro.redirect("/cuenta?volver=/finalizar-compra");}
+---
+
+<Layout title="Finalizar pedido">
+  <div class="container page-shell">
+    <Breadcrumb
+      titulo="Finalizar pedido"
+      categoria={{ nombre: "Carrito", href: "/carrito" }}
+    />
+    <div class="page-title compact">
+      <p class="eyebrow">ANTES DE CONFIRMAR</p>
+      <h1>Revisa tu selección.</h1>
+      <p>
+        Los precios y el stock se consultan nuevamente al abrir esta pantalla.
+      </p>
+    </div>
+    <Carrito checkout />
+  </div>
+</Layout>

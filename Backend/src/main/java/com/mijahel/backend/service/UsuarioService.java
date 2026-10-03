@@ -18,7 +18,7 @@ public class UsuarioService {
 
     public List<UsuarioResponseDTO> listarTodos() {
         return usuarioRepository.findAll().stream()
-                .map(u -> new UsuarioResponseDTO(u.getId(), u.getNombre(), u.getEmail(), u.getRol(), u.isActivo()))
+                .map(u -> new UsuarioResponseDTO(u.getId(), u.getNombre(), u.getUsername(), u.getEmail(), u.getRol(), u.isActivo()))
                 .collect(Collectors.toList());
     }
 }

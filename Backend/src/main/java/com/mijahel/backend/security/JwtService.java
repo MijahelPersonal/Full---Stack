@@ -23,12 +23,12 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String generarToken(String email, String rol) {
+    public String generarToken(String username, String rol) {
         Date ahora = new Date();
         Date expiracion = new Date(ahora.getTime() + expirationMs);
 
         return Jwts.builder()
-                .subject(email)
+                .subject(username)
                 .claim("rol", rol)
                 .issuedAt(ahora)
                 .expiration(expiracion)
@@ -36,13 +36,13 @@ public class JwtService {
                 .compact();
     }
 
-    public String extraerEmail(String token) {
+    public String extraerUsername(String token) {
         return extraerClaim(token, Claims::getSubject);
     }
 
-    public boolean esTokenValido(String token, String email) {
-        String emailToken = extraerEmail(token);
-        return emailToken.equals(email) && !esTokenExpirado(token);
+    public boolean esTokenValido(String token, String username) {
+        String usernameToken = extraerUsername(token);
+        return usernameToken.equals(username) && !esTokenExpirado(token);
     }
 
     private boolean esTokenExpirado(String token) {

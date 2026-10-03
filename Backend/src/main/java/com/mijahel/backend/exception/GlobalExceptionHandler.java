@@ -16,10 +16,19 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
+    public ResponseEntity<Map<String,Object>> manejarImagenGrande(org.springframework.web.multipart.MaxUploadSizeExceededException ex){
+        return construirRespuesta(HttpStatus.PAYLOAD_TOO_LARGE,"La imagen supera el límite de 2 MB");
+    }
+
+    @ExceptionHandler(org.springframework.web.server.ResponseStatusException.class)
+    public ResponseEntity<Map<String,Object>> manejarEstado(org.springframework.web.server.ResponseStatusException ex){
+        return construirRespuesta(HttpStatus.valueOf(ex.getStatusCode().value()), ex.getReason());
+    }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Map<String, Object>> manejarDuplicado(DataIntegrityViolationException ex) {
-        return construirRespuesta(HttpStatus.CONFLICT, "El correo ya está registrado");
+        return construirRespuesta(HttpStatus.CONFLICT, "Ya existe un registro con ese identificador o referencia");
     }
 
     @ExceptionHandler(RuntimeException.class)

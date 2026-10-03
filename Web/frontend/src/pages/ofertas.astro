@@ -1,0 +1,15 @@
+---
+import Catalogo from "../components/Catalogo.astro";
+import { prepararCatalogo } from "../lib/tienda";
+const query = new URLSearchParams(Astro.url.searchParams);
+query.set("oferta", "true");
+const resultado = await prepararCatalogo(query);
+Astro.response.status = resultado.status;
+---
+
+<Catalogo
+  resultado={resultado}
+  titulo="Ofertas Struch"
+  descripcion="Una oportunidad para mejorar tu equipo. Explora nuestros precios reducidos."
+  oferta
+/>

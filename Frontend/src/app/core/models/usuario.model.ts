@@ -1,24 +1,26 @@
-export type Rol = 'ADMINISTRADOR' | 'SUPERVISOR' | 'TECNICO';
+export type Rol = 'ADMINISTRADOR' | 'SUPERVISOR' | 'TECNICO' | 'VENDEDOR';
 
 export interface Usuario{
   id: string;
   nombre: string;
-  email: string;
+  username: string;
+  email?: string;
   rol: Rol;
   activo: boolean;
 }
 export interface AuthResponse{
   token: string;
-  email: string;
+  username: string;
   rol: Rol;
 }
 export interface LoginRequest{
-  email: string;
+  username: string;
   password: string;
 }
 export interface RegisterRequest{
   nombre: string;
-  email: string;
+  username: string;
+  email?: string;
   password: string;
   rol: Rol;
 }

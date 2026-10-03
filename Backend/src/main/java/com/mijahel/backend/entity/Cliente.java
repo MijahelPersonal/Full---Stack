@@ -12,9 +12,27 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @jakarta.validation.constraints.NotBlank
+    @jakarta.validation.constraints.Size(max=160)
     private String nombre;
+    private String nombres;
+    private String apellidos;
+    public String getNombres(){return nombres;}
+    public void setNombres(String v){nombres=v;}
+    public String getApellidos(){return apellidos;}
+    public void setApellidos(String v){apellidos=v;}
     private String direccion;
     private String telefono;
+    private String documento;
+    @jakarta.validation.constraints.Email
+    private String correo;
+    private boolean activo = true;
+    public String getDocumento(){return documento;}
+    public void setDocumento(String value){documento=value;}
+    public String getCorreo(){return correo;}
+    public void setCorreo(String value){correo=value;}
+    public boolean isActivo(){return activo;}
+    public void setActivo(boolean value){activo=value;}
     private BigDecimal latitud;
     private BigDecimal longitud;
 

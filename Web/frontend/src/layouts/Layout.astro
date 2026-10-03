@@ -1,0 +1,63 @@
+---
+import "../styles/struch.css";
+import "../styles/motion.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { estadoCatalogo, type EstadoCatalogo } from "../lib/tienda";
+interface Props {
+  title: string;
+  description?: string;
+  estado?: EstadoCatalogo | null;
+}
+const {
+  title,
+  description = "STRUCH. Componentes, laptops y periféricos. Encuentra el hardware para construir, trabajar y jugar.",
+  estado: inicial,
+} = Astro.props;
+let estado = inicial;
+if (inicial === undefined) {
+  try {
+    estado = await estadoCatalogo();
+  } catch {
+    estado = null;
+  }
+}
+Astro.response.headers.set("Cache-Control", "no-store");
+Astro.response.headers.set("X-Content-Type-Options", "nosniff");
+Astro.response.headers.set(
+  "Referrer-Policy",
+  "strict-origin-when-cross-origin",
+);
+---
+
+<!doctype html>
+<html
+  lang="es"
+  data-motion-diagnostics={
+    process.env.STRUCH_MOTION_DIAGNOSTICS === "1" ? "" : undefined
+  }
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#050505" />
+    <title>{title} · STRUCH</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      Saltar al contenido
+    </a>
+    <div class="header-sentinel" data-header-sentinel aria-hidden="true"></div>
+    <Header estado={estado || undefined} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <div class="toast" role="status" aria-live="polite" hidden data-toast></div>
+    <script>
+      import "../scripts/storefront";
+    </script>
+  </body>
+</html>

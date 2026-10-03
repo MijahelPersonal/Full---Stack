@@ -1,0 +1,30 @@
+appId: com.mijahel.gestion
+productName: SistemaGestion
+executableName: SistemaGestion
+artifactName: SistemaGestion-Setup.${ext}
+beforePack: electron/before-pack.cjs
+directories:
+  output: release
+files:
+  - build/icon.ico
+  - electron/updater.cjs
+  - electron/main.cjs
+  - electron/preload.cjs
+  - electron/protocol.cjs
+  - electron/config.cjs
+  - electron/config.production.json
+  - dist/desktop/browser/**/*
+  - package.json
+win:
+  icon: build/icon.ico
+  target: nsis
+nsis:
+  shortcutName: SistemaGestión
+  uninstallDisplayName: SistemaGestión
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+publish:
+  provider: github
+  owner: MijahelPersonal
+  repo: Full---Stack
+  releaseType: release

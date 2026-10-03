@@ -1,0 +1,3 @@
+import {Component,inject,signal} from '@angular/core';import {CommonModule} from '@angular/common';import {FormsModule} from '@angular/forms';import {ComercioService} from '../../core/services/comercio.service';import {Reporte} from '../../core/models/comercio.model';
+@Component({selector:'app-reportes',imports:[CommonModule,FormsModule],templateUrl:'./reportes.html'})
+export class Reportes {private api=inject(ComercioService);datos=signal<Reporte|null>(null);error=signal('');periodo='HOY';constructor(){this.cargar();}cargar(){this.error.set('');this.api.reporte(this.periodo).subscribe({next:d=>this.datos.set(d),error:e=>this.error.set(e.error?.error||'No se pudo cargar el reporte')});}}

@@ -11,7 +11,11 @@ public class RegisterRequest {
     @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
-    @NotBlank(message = "El email es obligatorio")
+    @NotBlank(message = "El usuario es obligatorio")
+    @Size(max=80)
+    @jakarta.validation.constraints.Pattern(regexp="[a-zA-Z0-9][a-zA-Z0-9._-]{0,79}",message="Usa letras, números, punto, guion o guion bajo")
+    private String username;
+
     @Email(message = "El email no tiene formato válido")
     private String email;
 
@@ -24,6 +28,8 @@ public class RegisterRequest {
 
     // getters y setters (los mismos que ya tenías)
     public String getNombre() { return nombre; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }

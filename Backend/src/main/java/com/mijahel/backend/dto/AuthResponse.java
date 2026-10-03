@@ -2,12 +2,12 @@ package com.mijahel.backend.dto;
 
 public class AuthResponse {
     private String token;
-    private String email;
+    private String username;
     private String rol;
 
-    public AuthResponse(String token, String email, String rol){
+    public AuthResponse(String token, String username, String rol){
         this.token = token;
-        this.email = email;
+        this.username = username;
         this.rol = rol;
     }
 
@@ -15,8 +15,8 @@ public class AuthResponse {
         return token;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
     public String getRol() {

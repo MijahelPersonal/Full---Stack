@@ -1,5 +1,9 @@
 # Frontend
 
+Para ejecutar Electron: `npm run electron:dev`. Para compilar escritorio:
+`npm run build:desktop`, seguido de `npm run electron:start`.
+Spring Boot y PostgreSQL se ejecutan por separado. Ver [guía del proyecto](../README.md).
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.5.
 
 ## Development server

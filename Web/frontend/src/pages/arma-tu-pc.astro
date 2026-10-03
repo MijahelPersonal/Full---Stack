@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Breadcrumb from "../components/Breadcrumb.astro";
+import Icono from "../components/Icono.astro";
+const partes = [
+  ["cpu", "Procesador", "procesador"],
+  ["board", "Placa madre", "placa"],
+  ["ram", "Memoria RAM", "ram"],
+  ["gpu", "Tarjeta gráfica", "rtx"],
+  ["ssd", "Almacenamiento", "ssd"],
+  ["box", "Fuente de poder", "fuente"],
+  ["case", "Case", "case"],
+];
+---
+
+<Layout title="Arma tu PC">
+  <div class="container page-shell">
+    <Breadcrumb titulo="Arma tu PC" />
+    <section class="builder-intro">
+      <div>
+        <p class="eyebrow">TU EQUIPO, A TU MANERA</p>
+        <h1>
+          ARMA TU <span>PC.</span>
+        </h1>
+        <p>Elige los componentes para construir tu equipo.</p>
+        <span class="status-label">Configurador completo · Próximamente</span>
+      </div>
+      <Icono nombre="cpu" />
+    </section>
+    <div class="builder-steps">
+      {partes.map(([icono, nombre, busqueda], i) => (
+        <a href={`/productos?search=${busqueda}`}>
+          <span class="step-number">0{i + 1}</span>
+          <Icono nombre={icono} />
+          <h2>{nombre}</h2>
+          <span>
+            Explorar componentes
+            <Icono nombre="flecha" />
+          </span>
+        </a>
+      ))}
+    </div>
+    <div class="builder-note">
+      <h2>Comienza por conocer tus componentes.</h2>
+      <p>
+        Por ahora puedes explorar el catálogo. La selección de componentes
+        compatibles y el cálculo del equipo completo estarán disponibles en una
+        próxima etapa.
+      </p>
+      <a class="button" href="/productos">
+        Comenzar configuración
+        <Icono nombre="flecha" />
+      </a>
+    </div>
+  </div>
+</Layout>

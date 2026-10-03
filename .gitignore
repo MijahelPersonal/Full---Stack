@@ -11,3 +11,18 @@ target/
 node_modules/
 dist/
 .angular/
+release/
+uploads/
+backups/
+*.log
+
+# Tienda Astro
+.astro/
+.env
+.env.*
+!.env.example
+Web/tools/demo/.state/
+.vercel/
+__pycache__/
+*.pyc
+Frontend/electron/config.production.json

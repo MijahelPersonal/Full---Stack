@@ -1,4 +1,4 @@
-# STRUCH
+# STRUCH — Tienda y Sistema de Gestión
 
 Proyecto Full Stack de ecommerce y sistema de gestión de inventario, pedidos y ventas. Integra una tienda pública de hardware con una aplicación Windows para administrar la operación de la empresa.
 

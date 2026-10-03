@@ -5,6 +5,7 @@ import { authGuard } from './core/guards/auth.guard';
 export const routes: Routes = [
  {path:'login',component:Login},
  {path:'',component:Layout,canActivate:[authGuard],children:[
+  {path:'acerca-de',loadComponent:()=>import('./features/acerca-de/acerca-de').then(m=>m.AcercaDe)},
   {path:'inicio',loadComponent:()=>import('./features/inicio/inicio').then(m=>m.Inicio)},
   {path:'pedidos-web',loadComponent:()=>import('./features/pedidos-web/pedidos-web').then(m=>m.PedidosWeb)},
   {path:'nueva-venta',loadComponent:()=>import('./features/nueva-venta/nueva-venta').then(m=>m.NuevaVenta)},

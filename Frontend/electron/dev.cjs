@@ -31,7 +31,7 @@ process.on('SIGTERM',()=>stop(0));
  if(stopping)return;
  if(!ready)throw new Error('Angular startup timed out');
  const environment={...process.env};delete environment.ELECTRON_RUN_AS_NODE;
- desktop=spawn(require('electron'),[path.join(__dirname,'main.cjs'),'--dev',...(smoke?['--smoke']:[])],{cwd:root,env:environment,stdio:'inherit',windowsHide:smoke});
+ desktop=spawn(require('electron'),[root,'--dev',...(smoke?['--smoke']:[])],{cwd:root,env:environment,stdio:'inherit',windowsHide:smoke});
  desktop.on('error',error=>{console.error(error.message);stop(1);});
  desktop.on('exit',code=>stop(code===null?1:code));
 })().catch(error=>{console.error(error.message);stop(1);});

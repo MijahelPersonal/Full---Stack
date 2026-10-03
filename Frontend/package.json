@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,11 +10,12 @@
     "electron:dev": "node electron/dev.cjs",
     "electron:smoke:dev": "node electron/dev.cjs --smoke",
     "build:desktop": "ng build --configuration production,desktop",
-    "electron:start": "electron electron/main.cjs",
-    "electron:smoke": "electron electron/main.cjs --smoke",
+    "electron:start": "electron .",
+    "electron:smoke": "electron . --smoke",
     "desktop:prepare": "node electron/prepare-production.cjs",
     "desktop:verify": "npm run build:desktop && electron-builder --dir",
-    "desktop:package": "npm run desktop:prepare && npm run build:desktop && electron-builder"
+    "desktop:package": "npm run desktop:prepare && npm run build:desktop && electron-builder --publish never",
+    "test:electron": "node --test electron/updater.test.cjs"
   },
   "private": true,
   "packageManager": "npm@11.16.0",
@@ -25,6 +26,7 @@
     "@angular/forms": "^22.1.0",
     "@angular/platform-browser": "^22.1.0",
     "@angular/router": "^22.1.0",
+    "electron-updater": "^6.8.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -39,5 +41,7 @@
     "typescript": "~6.0.2",
     "vitest": "^4.0.8"
   },
-  "main": "electron/main.cjs"
+  "main": "electron/main.cjs",
+  "description": "SistemaGestión: inventario, pedidos y ventas",
+  "author": "MijahelPersonal"
 }

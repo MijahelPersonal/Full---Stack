@@ -222,3 +222,5 @@ app-ventas .table-wrap td:nth-child(3){min-width:140px}
  app-productos .table-wrap th:last-child,app-clientes-comerciales .table-wrap th:last-child,app-ventas .table-wrap th:last-child{position:sticky;right:0;background:#fbfcfe;box-shadow:-1px 0 0 var(--border);z-index:2}
 }
 .drawer header{gap:14px}.drawer header>div{min-width:0}.drawer header h2{overflow-wrap:anywhere}
+/* Personalización básica: identidad azul actual; los módulos conservan sus tokens. */
+:root{--color-primary:#2868d9;--color-sidebar:#152337;--color-background:#f3f6fa;--color-text:#243247;--color-accent:var(--color-primary);--accent:var(--color-primary);--bg:var(--color-background);--text:var(--color-text)}

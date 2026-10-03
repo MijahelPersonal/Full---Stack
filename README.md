@@ -1,6 +1,6 @@
-# STRUCH - Sistema de Gestión + Ecommerce
+# STRUCH
 
-Tienda pública de hardware y aplicación Windows para gestionar inventario, pedidos y ventas. Una solución integrada para que los clientes realicen pedidos y el personal administre la operación de la empresa.
+Proyecto Full Stack de ecommerce y sistema de gestión de inventario, pedidos y ventas. Integra una tienda pública de hardware con una aplicación Windows para administrar la operación de la empresa.
 
 **[🌐 Ver tienda](https://struch.vercel.app)** · **[💻 Descargar aplicación para Windows](https://github.com/MijahelPersonal/Full---Stack/releases/download/v0.1.0-demo/SistemaGestion-Setup.exe)**
 
@@ -30,6 +30,7 @@ El instalador de esta demostración no tiene firma digital de Windows. No desact
 | Mi cuenta e historial de pedidos | Gestión de pedidos web |
 | Código y constancia de pedido | Clientes y permisos por rol |
 | Seguimiento y recojo en tienda | Historial de ventas POS/WEB y reportes |
+| | Actualizaciones mediante GitHub Releases |
 
 ## Cómo funciona
 
@@ -48,10 +49,19 @@ Esta demostración utiliza pedidos con recojo en tienda. No incluye pagos en lí
 
 | Área | Tecnologías |
 | --- | --- |
-| Servicios y seguridad | Java, Spring Boot, Spring Security, JWT, Spring Data JPA y Maven |
-| Aplicación de gestión | Angular, TypeScript y Electron |
+| Backend | Java, Spring Boot, PostgreSQL, Spring Security, JWT, Spring Data JPA y Maven |
+| Aplicación de gestión | Angular, TypeScript, Electron y electron-updater |
 | Tienda pública | Astro, TypeScript, JavaScript, Tailwind CSS y Sharp |
 | Desarrollo y distribución | Git, GitHub y publicaciones de versiones |
+| Cloud | Railway y Vercel |
+
+## Actualizaciones de SistemaGestión
+
+La versión 0.1.0 para Windows incorpora actualizaciones mediante GitHub Releases. La aplicación detecta nuevas versiones y permite decidir cuándo descargarlas y reiniciar para instalarlas.
+
+Si instalaste la demo anterior, ejecuta una vez el nuevo Setup enlazado arriba para disponer del updater. Las futuras versiones se podrán actualizar desde Gestión.
+
+[Cómo publicar y probar nuevas versiones](Frontend/ACTUALIZACIONES.md).
 
 ## Capturas
 

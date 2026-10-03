@@ -68,6 +68,19 @@ app.whenReady().then(async () => {
             if (login.authenticated) {
               const response = await fetch(config.apiUrl + '/inicio/resumen', { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }, signal: AbortSignal.timeout(3000) });
               login.protectedApiStatus = response.status;
+              login.navigation = [];
+              for (const [route, selector, endpoint] of [
+                ['/productos', 'app-productos', '/productos'],
+                ['/inventario', 'app-inventario', '/inventario'],
+                ['/pedidos-web', 'app-pedidos-web', '/pedidos-web'],
+                ['/ventas', 'app-ventas', '/ventas'],
+                ['/reportes', 'app-reportes', '/reportes/resumen']
+              ]) {
+                document.querySelector('a[href="' + route + '"]').click();
+                for (let i = 0; i < 100 && !document.querySelector(selector); i++) await new Promise(r => setTimeout(r, 100));
+                const response = await fetch(config.apiUrl + endpoint, { headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }, signal: AbortSignal.timeout(10000) });
+                login.navigation.push({ route, rendered: !!document.querySelector(selector), status: response.status });
+              }
             }
             username.value = ''; password.value = '';
           }
@@ -77,6 +90,7 @@ app.whenReady().then(async () => {
         console.log('ELECTRON_SMOKE', JSON.stringify({ ...result, nodeIntegration: preferences.nodeIntegration, contextIsolation: preferences.contextIsolation, sandbox: preferences.sandbox }));
         if (!result.loginRendered || !result.nodeUnavailable || !preferences.contextIsolation || !preferences.sandbox || preferences.nodeIntegration) throw new Error('Smoke check failed');
         if (credentials && (!result.login?.authenticated || !result.login.dashboardRendered || result.login.error || result.login.protectedApiStatus !== 200)) throw new Error('Login check failed');
+        if (credentials && result.login.navigation.some(page => !page.rendered || page.status !== 200)) throw new Error('Navigation check failed');
         if (process.env.GESTION_TEST_SALE === '1') {
           if (!credentials || parsedApi.port !== '8081') throw new Error('La venta smoke requiere el backend de pruebas en 8081');
           const source = require('node:fs').readFileSync(path.join(__dirname,'sale-smoke.cjs'),'utf8');

@@ -1,5 +1,7 @@
 # Preparación de despliegue — STRUCH y SistemaGestion
 
+Despliegue real completado: [resultado, URLs definitivas y acceso administrativo](DEPLOYMENT-RESULTADO.md).
+
 ## Arquitectura
 
 STRUCH Astro SSR en Vercel → HTTPS → Spring Boot en Railway → PostgreSQL privado en Railway.

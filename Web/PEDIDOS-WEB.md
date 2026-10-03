@@ -1,6 +1,6 @@
 # Flujo de pedidos STRUCH → Gestión
 
-Implementado sobre `feature/tienda-web`, sin commit, push ni merge. Las categorías existentes y el catálogo maestro no se reorganizaron.
+Implementado sobre `feature/tienda-web`. Este documento conserva las pruebas de la etapa inicial del flujo; el despliegue y la distribución posteriores se describen en [DEPLOYMENT-RESULTADO.md](../DEPLOYMENT-RESULTADO.md). Las categorías existentes y el catálogo maestro no se reorganizaron.
 
 ## 1. Arquitectura
 
@@ -94,7 +94,7 @@ La migración también se aplicó en el backend habitual localhost:8080. Se comp
 
 ## 14. Git y revisión
 
-Rama: feature/tienda-web. Todos los cambios siguen sin staging, commit, push ni merge. git status incluye también el catálogo y Web pendientes desde etapas anteriores; no son todos cambios exclusivos de esta etapa. El estado final completo se entrega en un archivo aparte para evitar omitir el directorio Web no rastreado.
+Rama de esta etapa: feature/tienda-web. El estado sin staging/commit/push correspondía a la revisión inicial; posteriormente el trabajo aprobado se guardó en Git y se desplegó. Consultar el historial de la rama y el informe de despliegue para el estado vigente. No se realizó merge con main.
 
 ## Repetir las pruebas
 

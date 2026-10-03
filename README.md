@@ -1,156 +1,166 @@
-# Gestión: web y escritorio
+# STRUCH - Sistema de Gestión + Ecommerce
 
-## MVP de inventario y ventas
+Proyecto Full Stack compuesto por una tienda pública de hardware y una aplicación de escritorio para gestionar inventario, pedidos y ventas. Ambos clientes comparten un backend y una base de datos cloud: disponibilidad, precios y operaciones se mantienen centralizados.
 
-La navegación actual es Inicio, Nueva venta, Productos, Inventario, Clientes,
-Ventas y Reportes básicos. Servicios, Técnicos y Materiales permanecen en el
-código anterior, fuera de la navegación. Las cuentas existentes se conservan.
-ADMINISTRADOR y SUPERVISOR administran productos e inventario; VENDEDOR puede
-consultar y registrar ventas y clientes. TECNICO se conserva para los módulos
-antiguos y no tiene permisos comerciales. El registro de usuarios requiere
-ahora un administrador autenticado y no aparece en el login.
+**[🌐 Tienda online](https://struch.vercel.app)** · **[💻 Descargar Gestión para Windows](https://github.com/MijahelPersonal/Full---Stack/releases/download/v0.1.0-demo/SistemaGestion-Setup.exe)** · **[Backend API](https://backend-production-cd4a.up.railway.app/api)** · **[Health](https://backend-production-cd4a.up.railway.app/api/health)**
 
-El primer arranque del nuevo backend aplica el SQL aditivo e idempotente
-`Backend/src/main/resources/db/migration/V1__comercio_mvp.sql` mediante Spring
-SQL initialization. Crea cuatro tablas comerciales, amplía clientes y permite
-el rol VENDEDOR. Hibernate valida el esquema; no elimina tablas antiguas.
-Este MVP usa un script de esquema idempotente, no un historial Flyway.
-No convierte materiales antiguos en productos ni servicios antiguos en ventas.
-La base requiere el esquema anterior del proyecto.
+## Descargar aplicación
 
-Categoría y marca se ingresan como texto en Productos y generan los filtros
-del POS. Los precios son PEN, sin cálculo separado de impuestos o descuentos.
-Stock inicial, entradas, salidas y ventas crean movimientos. No hay borrado
-físico de productos. Administrador puede eliminar clientes sin referencias;
-los clientes con ventas o servicios se desactivan y conservan su historial. Las ventas guardan sus precios,
-cliente y vendedor históricos. Los totales se calculan en Spring Boot con
-BigDecimal. La transacción bloquea productos en orden estable y conserva
-una clave única para reintentos. No editar tablas de stock directamente.
+[**Descargar SistemaGestion para Windows**](https://github.com/MijahelPersonal/Full---Stack/releases/download/v0.1.0-demo/SistemaGestion-Setup.exe)
 
-Las ventas son completadas; anulación, devoluciones, pagos, facturación
-electrónica, múltiples almacenes y reportes avanzados están fuera del MVP.
-Las consultas son listas simples para volúmenes pequeños; el MVP no incorpora
-todavía paginación en servidor ni gestión independiente de categorías y marcas.
+[STRUCH v0.1.0 Demo — notas de la Release](https://github.com/MijahelPersonal/Full---Stack/releases/tag/v0.1.0-demo) · Windows x64 · aproximadamente 110 MiB · requiere conexión a Internet.
 
-### Validación
+## Arquitectura
 
-Se creó `gestor_mvp_test` copiando únicamente el esquema anterior. Las cuentas,
-productos y ventas de validación pertenecen exclusivamente a esa base.
-El backend de pruebas usa 8081; la configuración normal conserva 8080.
-No ejecutar las pruebas de integración contra gestor_db.
-
-Desde Backend:
-
-```powershell
-.\mvnw.cmd -B test '-Dtest=ComercioServiceIT,ServicioServiceTest,BackendApplicationTests' '-Dspring.datasource.url=jdbc:postgresql://localhost:5432/gestor_mvp_test'
+```mermaid
+flowchart TD
+    W[STRUCH · Astro · Vercel] -->|HTTPS| B[Spring Boot · Railway]
+    D[Gestión · Angular + Electron · Windows] -->|HTTPS| B
+    B --> P[(PostgreSQL · Railway)]
+    B --> V[Railway Volume · imágenes de productos]
 ```
 
-Desde Frontend:
+STRUCH atiende a los clientes desde el navegador; Gestión permite a los empleados administrar la operación desde Windows. Spring Boot valida permisos, calcula totales y controla el stock mediante transacciones. PostgreSQL almacena los datos comerciales y las rutas de imágenes; los archivos se guardan en un Volume persistente, separados de la base.
 
-```powershell
-npm test -- --watch=false
-npm run build
-npm run build:desktop
-npm run electron:dev
-```
+La aplicación Windows se conecta al mismo API HTTPS que utiliza la tienda. El backend y PostgreSQL no se empaquetan dentro del instalador.
 
-El smoke puede usar GESTION_TEST_USERNAME y GESTION_TEST_PASSWORD temporales.
-GESTION_TEST_SALE=1 comprueba una venta mediante la interfaz y verifica
-detalles, stock y movimientos; solo se permite con el backend de pruebas
-8081 y productos VALIDACION-RTX / VALIDACION-MOUSE preparados.
-GESTION_TEST_CAPTURE_DIR permite capturar la pantalla para revisión.
-Cada sesión smoke tiene un perfil temporal independiente.
-La compilación desktop desactiva únicamente la inserción de CSS crítico
-para evitar handlers inline bloqueados por CSP; Electron mantiene su aislamiento.
+## Funcionalidades
 
-Angular y Electron usan el mismo backend Spring Boot y PostgreSQL externos.
-Electron no inicia ni instala Java, Spring Boot o PostgreSQL.
-
-Desde `Frontend`, después de instalar dependencias con `npm install`:
-
-| Comando | Resultado |
+| STRUCH · tienda pública | Gestión · operación interna |
 | --- | --- |
-| `npm start` | Angular web en http://localhost:4200 |
-| `npm run build` | Compilación web |
-| `npm run electron:dev` | Inicia Angular y abre Electron; al cerrar Electron detiene Angular |
-| `npm run build:desktop` | Angular optimizado en dist/desktop/browser |
-| `npm run electron:start` | Abre la compilación desktop con app://gestion |
-| `npm run electron:smoke:dev` | Comprueba login, preload y aislamiento en Electron desarrollo y cierra |
-| `npm run electron:smoke` | Comprueba la compilación desktop y cierra |
-| `npm run desktop:package` | Genera un instalador del frontend, sin backend ni base de datos |
+| Catálogo, categorías y marcas | Inicio con indicadores y datos reales |
+| Búsqueda, filtros y detalle de producto | Productos e imágenes |
+| Carrito con precios y disponibilidad actuales | Inventario, entradas, salidas y movimientos |
+| Registro y login de clientes | Venta en tienda / POS |
+| Mi cuenta e historial de pedidos | Gestión de pedidos web |
+| Código y constancia de pedido imprimible | Clientes y control por roles |
+| Consulta del estado y recojo en tienda | Historial de ventas POS/WEB |
+| | Reportes básicos y control de stock |
 
-El puerto 4200 debe estar libre para `electron:dev`. Spring Boot debe iniciarse
-por separado como hasta ahora y estar disponible en http://localhost:8080.
-La URL web predeterminada continúa en src/environments/environment.ts.
-El build desktop utiliza environment.desktop.ts. Electron entrega su URL mediante
-un IPC limitado, antes del arranque Angular. Para cambiarla en PowerShell:
+### Flujo del negocio
 
-```powershell
-$env:GESTION_API_URL = 'http://localhost:8080/api'
-npm run electron:dev
+1. El cliente entra a STRUCH, agrega productos al carrito e inicia sesión.
+2. Genera un pedido para **recojo en tienda** y obtiene un código `STR-...` y su constancia.
+3. El pedido aparece en Gestión. El administrador confirma y el sistema reserva stock.
+4. El pedido se marca listo para recoger; el cliente consulta su estado desde Mi cuenta.
+5. En tienda, el empleado busca y valida el código antes de entregar.
+6. La entrega registra una **Venta WEB** y actualiza los reportes. No descuenta el stock por segunda vez.
+
+Las ventas físicas se registran desde **Venta en tienda / POS**, generan **Venta POS** y descuentan stock en la misma transacción que crea el detalle y los movimientos. Cancelar un pedido reservado libera su stock; cancelar uno pendiente no modifica existencias.
+
+Esta demo no incluye pagos online, facturación electrónica, devoluciones ni múltiples almacenes. La compra web funciona mediante pedidos y recojo, sin cobro online. Las marcas y productos del catálogo de demostración no implican afiliación con fabricantes.
+
+## Tecnologías
+
+| Área | Tecnologías utilizadas |
+| --- | --- |
+| Backend | Java 17, Spring Boot 4, Spring Security, JWT, Spring Data JPA / Hibernate, Maven |
+| Datos | PostgreSQL 18; scripts SQL aditivos e idempotentes mediante Spring SQL initialization |
+| Gestión | Angular 22, TypeScript, Electron 44 |
+| Tienda | Astro 7, TypeScript / JavaScript, Tailwind CSS 4, Sharp para imágenes |
+| Cloud | Railway, PostgreSQL Railway, Railway Volume y Vercel |
+| Desarrollo y distribución | Git, GitHub y GitHub Releases |
+
+Las migraciones actuales usan el inicializador SQL de Spring y Hibernate valida el esquema. No se utiliza Flyway. Las interacciones visuales usan CSS y JavaScript; no se utiliza GSAP.
+
+## Capturas
+
+### Catálogo público en producción
+
+![Catálogo STRUCH con productos reales e imágenes cloud](docs/images/struch-catalogo.png)
+
+### Gestión instalada en Windows
+
+![Venta en tienda con catálogo e imágenes Railway, desde la instalación Windows](docs/images/gestion-pos.png)
+
+Las capturas muestran la versión desplegada y la aplicación instalada; no incluyen contraseñas, tokens ni configuración privada.
+
+## Aplicación de escritorio
+
+1. Descargar `SistemaGestion-Setup.exe` desde GitHub Release.
+2. Ejecutar el instalador y completar las confirmaciones que solicite Windows.
+3. Abrir **SistemaGestion**.
+4. Iniciar sesión con una cuenta interna autorizada.
+
+No requiere instalar Java, PostgreSQL, Node.js ni IntelliJ. **Requiere conexión a Internet**, porque utiliza el backend y la base de datos cloud.
+
+Versión Windows x64. El instalador de esta demo no tiene firma Authenticode; no se deben desactivar ni saltar las protecciones de Windows. Las cuentas de empleados son administradas internamente: el registro público de STRUCH crea cuentas de clientes, no cuentas administrativas. No se publican credenciales de acceso en este repositorio.
+
+## Organización del repositorio
+
+```text
+Backend/                  Spring Boot, seguridad, servicios, SQL y pruebas
+Frontend/                 Angular y Electron para Gestión
+Web/frontend/             Tienda pública Astro
+Web/product-images-library/  Biblioteca de imágenes del catálogo demo
+Web/demo-product-images/  Recursos visuales demo conservados
+Web/tools/demo/           Herramientas de carga del catálogo demo
+tools/deployment/         Traslado y validación cloud
+docs/images/              Capturas para documentación
 ```
 
-La URL no debe contener contraseñas. No colocar secretos PostgreSQL en Electron.
-CORS mantiene http://localhost:4200 y permite app://gestion para desktop;
-reiniciar el backend después del cambio de configuración de seguridad.
-Las rutas Angular usan el protocolo local con fallback a index.html.
-No se desactiva webSecurity ni se expone Node.js al renderer.
-Las fuentes Google existentes siguen necesitando conexión a Internet.
+El instalador se distribuye como **Asset de GitHub Release**, fuera del historial Git. Builds, dependencias, uploads locales, backups, logs y archivos `.env` reales están excluidos.
 
-El smoke básico no crea usuarios ni modifica datos. Los flujos SALE/MEDIA
-modifican exclusivamente la base aislada y no reemplazan
-una prueba de login real con un backend disponible.
-Para incluir el formulario de login y una consulta autenticada al dashboard en
-una comprobación smoke, proporcionar temporalmente `GESTION_TEST_USERNAME` y
-`GESTION_TEST_PASSWORD` en el entorno del proceso. Se requiere una cuenta
-existente con acceso al dashboard. Las credenciales y el token no se imprimen;
-la sesión de prueba se elimina al finalizar. No guardar estas variables en Git.
+## Desarrollo local
 
+Requisitos para desarrollar: Java 17 o compatible, Maven Wrapper, Node.js 24, npm y PostgreSQL. Para utilizar la aplicación instalada solo se necesita Windows e Internet.
 
-Imágenes de productos y eliminación de clientes
+### Backend
 
-Los productos admiten una imagen opcional JPG/JPEG, PNG o WEBP de hasta 2 MB.
-El formulario permite vista previa, reemplazo y eliminación. Las miniaturas y
-el POS muestran un placeholder cuando no hay imagen o no puede cargarse.
-Spring Boot valida extensión, MIME, contenido y dimensiones (máximo 16 MP).
-Los archivos usan nombres UUID, sin reutilizar el nombre aportado por el usuario.
-PostgreSQL guarda únicamente imagen_url, nunca el archivo como BLOB.
-La carpeta predeterminada es Backend/uploads/productos al iniciar desde Backend;
-PRODUCTOS_UPLOAD_DIR permite configurar una ruta persistente controlada.
-Uploads está excluido de Git. Incluir esa carpeta en las copias de seguridad.
-El reemplazo elimina el archivo antiguo después del commit de la transacción;
-si la transacción revierte, se elimina la imagen nueva.
-GET /api/productos/imagenes/{nombre} sirve exclusivamente los archivos de imagen
-validados; las cargas y cambios de productos siguen protegidos por JWT.
-La imagen pública evita incluir tokens en URLs y funciona en navegador/Electron.
+Desde `Backend/`, crear la configuración privada local siguiendo `Backend/.env.example`, configurar una base PostgreSQL y ejecutar:
 
-Productos acepta JSON como antes, y multipart con la parte producto (JSON) y
-la parte opcional imagen. PUT admite eliminarImagen=true para quitarla.
-Solo Administrador puede eliminar/desactivar clientes y consultar inactivos.
-DELETE /api/clientes/{id} devuelve eliminado y mensaje, indicando borrado físico
-o inactivación. GET /api/clientes lista activos; incluirInactivos=true está
-reservado a Administrador. El POS nunca ofrece inactivos, y el backend rechaza
-ventas nuevas para ellos. El bloqueo del cliente serializa venta y eliminación.
+```powershell
+./mvnw.cmd spring-boot:run
+```
 
-GESTION_TEST_MEDIA=1 ejecuta creación con PNG, reemplazo WEBP/JPEG, eliminación,
-placeholder, POS, una venta completa, eliminación/inactivación de clientes y
-comprobación de permisos. Requiere backend 8081 conectado a gestor_mvp_test,
-carpeta de pruebas y credenciales temporales del entorno; no usar con gestor_db.
+### Gestión Angular / Electron
 
+Desde `Frontend/`:
 
-Inicio de sesión interno por username
+```powershell
+npm ci
+npm start                 # Angular web
+npm run electron:dev      # Angular + Electron en desarrollo
+```
 
-POST /api/auth/login recibe username y password. El correo es contacto opcional,
-no una credencial. El username se normaliza a minúsculas y tiene una restricción
-UNIQUE en PostgreSQL. No hay ruta ni enlace de registro público; el endpoint
-existente de creación exige JWT de Administrador.
+El backend local se ejecuta por separado. La configuración desktop de producción exige una URL pública HTTPS; el renderer no recibe credenciales de base de datos ni el secreto JWT.
 
-Al iniciar Spring Boot, V2__username.sql añade el campo y asigna usernames únicos
-basados en el nombre a usuarios existentes (sufijos _2, _3 en caso de coincidencia).
-La migración es idempotente y conserva IDs, contraseñas, roles y demás datos.
-V1 y V2 usan el separador ;; del inicializador SQL para respetar los bloques DO.
-Respaldar la base antes de desplegar y reiniciar el backend con el código nuevo.
-Los JWT anteriores con correo como subject dejan de ser válidos: cerrar la sesión
-anterior e iniciar nuevamente con username y la misma contraseña.
-En cada petición, Spring Security consulta el usuario y su rol/estado actuales;
-una cuenta desactivada recibe 401 incluso con un JWT anterior aún no expirado.
+### Tienda Astro
+
+Desde `Web/frontend/`, configurar `.env` siguiendo `.env.example`:
+
+```powershell
+npm ci
+npm run dev
+```
+
+Consultar [la guía de despliegue](DEPLOYMENT.md) para las variables y comandos de producción. Las pruebas de persistencia deben usar la base aislada `gestor_mvp_test`, nunca la base habitual ni producción. La prueba cloud que crea un pedido es explícita; las comprobaciones de instalación son de lectura.
+
+## Seguridad
+
+- Autenticación de empleados y clientes separada; permisos comprobados en Spring Boot.
+- Estado actual del usuario consultado en cada petición autenticada: desactivar una cuenta invalida su acceso incluso con un JWT previo.
+- Cuentas web con cookies HttpOnly, Secure bajo HTTPS y SameSite=Lax; operaciones web comprueban el origen.
+- Electron con `nodeIntegration: false`, `contextIsolation: true` y `sandbox: true`.
+- Precios, totales, disponibilidad y transiciones de pedido validados por el backend.
+- Imágenes opcionales validadas por formato, contenido y tamaño; archivos en almacenamiento controlado, sin BLOB grandes.
+- Secretos únicamente en configuración privada y variables cloud. El instalador conoce solo la URL pública del API.
+
+## Estado del proyecto
+
+| Componente | Estado |
+| --- | --- |
+| STRUCH online | ✅ |
+| Backend cloud | ✅ |
+| PostgreSQL cloud y Volume | ✅ |
+| Gestión Windows instalada y probada | ✅ |
+| Pedidos web | ✅ |
+| Inventario compartido | ✅ |
+
+Demo inicial desplegada. Se mantienen documentados el aviso de tamaño CSS del login, la ausencia de firma Windows y un advisory transitivo sin versión corregida. La validación completa y sus límites están en el informe técnico.
+
+## Documentación
+
+- [Preparación y comandos de despliegue](DEPLOYMENT.md)
+- [Resultado del despliegue real y validaciones](DEPLOYMENT-RESULTADO.md)
+- [Arquitectura y transacciones de pedidos web](Web/PEDIDOS-WEB.md)

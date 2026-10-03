@@ -64,6 +64,20 @@ Se restituyó la unidad mediante movimiento `Restitución de unidad QA despliegu
 - Se ejecutó **win-unpacked**: login, dashboard, Productos, Inventario, Pedidos web, Ventas y Reportes renderizados; APIs HTTP 200; smoke salida 0. nodeIntegration=false, contextIsolation=true, sandbox=true.
 - No se instaló NSIS en otra PC. La prueba corresponde al ejecutable empaquetado generado junto al Setup en este equipo.
 
+### Instalación Windows real — cierre de etapa
+
+Se ejecutó el Setup normalmente y se instaló en `C:\Users\USER\AppData\Local\Programs\frontend\SistemaGestion.exe`. Se abrió el ejecutable de esa instalación, no Electron development ni win-unpacked. No se desinstaló al finalizar.
+
+Login cloud, dashboard, Productos, Inventario, Pedidos web, Ventas y Reportes pasaron con APIs HTTP 200; Venta en tienda renderizó productos e imágenes Railway y cliente Público general. La comprobación fue de lectura y no creó ventas.
+
+Se detuvo temporalmente el proceso Spring Boot habitual, se comprobó que no existía listener en el puerto 8080 y se repitió el smoke de la instalación: salida 0, API exclusivamente `https://backend-production-cd4a.up.railway.app/api`. Después se restauró Spring Boot local. PostgreSQL local no se detuvo ni alteró.
+
+La primera detención por Stop-Process falló y dejó el backend activo; se descartó esa comprobación como prueba de independencia local. La repetición verificó la terminación del proceso antes del smoke. Evidencias privadas: `Backend/target/installed-no-localhost.log` y `installed-no-localhost/mvp-desktop.png`.
+
+El código de esta versión no había eliminado explícitamente el menú nativo predeterminado de Electron; no se declara su eliminación en esta etapa de documentación/distribución. No se saltaron protecciones de Windows.
+
+Distribución pública: [STRUCH v0.1.0 Demo](https://github.com/MijahelPersonal/Full---Stack/releases/tag/v0.1.0-demo), prerelease creada desde `292e8ee7cf524df1df897f5cfde99f5dfe8c10de` de feature/tienda-web. [Asset directo SistemaGestion-Setup.exe](https://github.com/MijahelPersonal/Full---Stack/releases/download/v0.1.0-demo/SistemaGestion-Setup.exe): 115 090 327 bytes, SHA256 igual al instalador local. El ejecutable no se incluye en el historial Git. README y capturas se actualizan en la rama feature/tienda-web; main permanece sin merge.
+
 ## Incidencias y límites
 
 - Railway CLI: alta inicial de Volume falló internamente; completada con IDs. SSH requirió registrar clave en .ssh y el túnel no abrió; se usó proxy TLS temporal, ya retirado.
